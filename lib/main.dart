@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Deal Dash',
       theme: ThemeData.light(),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }

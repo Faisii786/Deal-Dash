@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/auth/signup.dart';
-import 'package:e_commerce_app/screens/Dashboard.dart';
+import 'package:e_commerce_app/screens/bottom_navBar.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/button.dart';
 import 'package:e_commerce_app/widgets/text_field.dart';
@@ -27,12 +27,12 @@ class _LoginPageState extends State<LoginPage> {
               AppColors().backgroundColor1,
             ]),
           ),
-          height: double.infinity,
-          width: double.infinity,
+          height: Get.height * 1,
+          width: Get.width * 1,
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 20),
-            child: Stack(
+            child: Column(
               children: [
                 Align(
                   alignment: Alignment.topRight,
@@ -41,6 +41,9 @@ class _LoginPageState extends State<LoginPage> {
                     style: GoogleFonts.sansita(
                         color: AppColors().whiteColor, fontSize: 18),
                   ),
+                ),
+                const SizedBox(
+                  height: 50,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -142,15 +145,15 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     MyButton(
                         text: 'Login',
                         onPressed: () {
-                          Get.to(const DashboardScreen());
+                          Get.to(() => MyBottomNavbar());
                         }),
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -158,20 +161,20 @@ class _LoginPageState extends State<LoginPage> {
                         Text(
                           "Not a member yet ? ",
                           style: GoogleFonts.roboto(
-                              color: AppColors().whiteColor, fontSize: 18),
+                              color: AppColors().whiteColor, fontSize: 15),
                         ),
                         const SizedBox(
                           width: 10,
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(const SignUpPage());
+                            Get.to(() => const SignUpPage());
                           },
                           child: Text(
                             "Register",
                             style: GoogleFonts.montserrat(
                                 color: Colors.amber,
-                                fontSize: 18,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold),
                           ),
                         )

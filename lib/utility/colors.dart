@@ -7,4 +7,5 @@ class AppColors {
   final whiteColor = Colors.white;
   final blackColor = Colors.black;
   final greykColor = Colors.grey;
+  final SearchTextFieldbkgrnClr = Color.fromARGB(255, 206, 205, 205);
 }

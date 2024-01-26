@@ -26,171 +26,118 @@ class _SignUpPageState extends State<SignUpPage> {
               AppColors().backgroundColor1,
             ]),
           ),
-          height: double.infinity,
-          width: double.infinity,
+          height: Get.height * 1,
+          width: Get.width * 1,
           child: Padding(
             padding:
                 const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 20),
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Text(
-                    "Deal Dash",
-                    style: GoogleFonts.sansita(
-                        color: AppColors().whiteColor, fontSize: 18),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Text(
+                      "Deal Dash",
+                      style: GoogleFonts.sansita(
+                          color: AppColors().whiteColor, fontSize: 18),
+                    ),
                   ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment:
-                      CrossAxisAlignment.start, // Start content
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const SizedBox(
-                      width: 30,
-                      height: 2,
-                      child: LinearProgressIndicator(
-                        value: 3,
-                        valueColor:
-                            AlwaysStoppedAnimation<Color>(Colors.amber),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // Start content
+                    children: [
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Signup",
-                      style: GoogleFonts.montserrat(
-                          color: AppColors().whiteColor, fontSize: 30),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: const MyTextField(
-                          hintText: 'Enter Firts Name',
-                          labelText: 'Firts Name',
-                          icon: Icons.person),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: const MyTextField(
-                          hintText: 'Enter Last Name',
-                          labelText: 'Last Name',
-                          icon: Icons.person),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: const MyTextField(
-                          hintText: 'Enter Email',
-                          labelText: 'Email Adress',
-                          icon: Icons.person),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: const MyTextField(
-                          hintText: 'Enter password',
-                          labelText: 'Password',
-                          icon: Icons.password),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: const MyTextField(
-                          hintText: 'Enter Confirm password',
-                          labelText: 'Confirm Password',
-                          icon: Icons.password),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isChecked = !isChecked;
-                            });
-                          },
-                          child: Row(
-                            children: [
-                              Container(
-                                width: 18.0,
-                                height: 18.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  border: Border.all(
-                                    color: AppColors().whiteColor,
-                                    width: 2.0,
-                                  ),
-                                ),
-                                child: isChecked
-                                    ? Icon(
-                                        Icons.check,
-                                        size: 12.0,
-                                        color: AppColors().whiteColor,
-                                      )
-                                    : null,
-                              ),
-                              const SizedBox(width: 8.0),
-                              Text(
-                                "Remember",
-                                style: GoogleFonts.roboto(
-                                  color: AppColors().whiteColor,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ],
-                          ),
+                      const SizedBox(
+                        width: 30,
+                        height: 2,
+                        child: LinearProgressIndicator(
+                          value: 3,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.amber),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "Forget Password?",
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Signup",
+                        style: GoogleFonts.montserrat(
+                            color: AppColors().whiteColor, fontSize: 30),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: const MyTextField(
+                            hintText: 'Enter Firts Name',
+                            labelText: 'Firts Name',
+                            icon: Icons.person),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: const MyTextField(
+                            hintText: 'Enter Last Name',
+                            labelText: 'Last Name',
+                            icon: Icons.person),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: const MyTextField(
+                            hintText: 'Enter Email',
+                            labelText: 'Email Adress',
+                            icon: Icons.person),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: const MyTextField(
+                            hintText: 'Enter password',
+                            labelText: 'Password',
+                            icon: Icons.password),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: const MyTextField(
+                            hintText: 'Enter Confirm password',
+                            labelText: 'Confirm Password',
+                            icon: Icons.password),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      MyButton(text: 'Register', onPressed: () {}),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Already Registered ? ",
                             style: GoogleFonts.roboto(
-                              color: AppColors().whiteColor,
-                              fontSize: 15,
+                                color: AppColors().whiteColor, fontSize: 15),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.to(() => const LoginPage());
+                            },
+                            child: Text(
+                              "Login",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.amber,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    MyButton(text: 'Register', onPressed: () {}),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Already Registered ? ",
-                          style: GoogleFonts.roboto(
-                              color: AppColors().whiteColor, fontSize: 18),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(const LoginPage());
-                          },
-                          child: Text(
-                            "Login",
-                            style: GoogleFonts.montserrat(
-                                color: Colors.amber,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
