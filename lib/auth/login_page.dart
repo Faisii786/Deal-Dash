@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/auth/signup.dart';
+import 'package:e_commerce_app/screens/Dashboard.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/button.dart';
 import 'package:e_commerce_app/widgets/text_field.dart';
@@ -30,14 +31,15 @@ class _LoginPageState extends State<LoginPage> {
           width: double.infinity,
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 50, right: 50, bottom: 50, top: 20),
+                const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 20),
             child: Stack(
               children: [
                 Align(
                   alignment: Alignment.topRight,
                   child: Text(
                     "Deal Dash",
-                    style: TextStyle(color: AppColors().whiteColor),
+                    style: GoogleFonts.sansita(
+                        color: AppColors().whiteColor, fontSize: 18),
                   ),
                 ),
                 Column(
@@ -118,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               const SizedBox(width: 8.0),
                               Text(
-                                "Remember Password",
+                                "Remember",
                                 style: GoogleFonts.roboto(
                                   color: AppColors().whiteColor,
                                   fontSize: 15,
@@ -142,7 +144,11 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 50,
                     ),
-                    MyButton(text: 'Login', onPressed: () {}),
+                    MyButton(
+                        text: 'Login',
+                        onPressed: () {
+                          Get.to(const DashboardScreen());
+                        }),
                     const SizedBox(
                       height: 50,
                     ),
@@ -159,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(SignUpPage());
+                            Get.to(const SignUpPage());
                           },
                           child: Text(
                             "Register",
