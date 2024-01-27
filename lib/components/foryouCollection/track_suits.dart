@@ -5,11 +5,26 @@ import 'package:get/get.dart';
 
 class TrackSuits extends StatefulWidget {
   final List images = [
-    ClothesModel(img: 'assets/images/trackSuits/tr1.png'),
-    ClothesModel(img: 'assets/images/trackSuits/tr2.png'),
-    ClothesModel(img: 'assets/images/trackSuits/tr3.png'),
-    ClothesModel(img: 'assets/images/trackSuits/tr4.jpg'),
-    ClothesModel(img: 'assets/images/trackSuits/tr5.jpg'),
+    ClothesModel(
+      img: 'assets/images/trackSuits/tr1.png',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/trackSuits/tr2.png',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/trackSuits/tr3.png',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/trackSuits/tr4.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/trackSuits/tr5.jpg',
+      ontap: () {},
+    ),
   ];
   TrackSuits({super.key});
 

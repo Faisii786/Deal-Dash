@@ -3,6 +3,7 @@ import 'package:e_commerce_app/components/foryouCollection/hoddies.dart';
 import 'package:e_commerce_app/components/foryouCollection/jeans.dart';
 import 'package:e_commerce_app/components/foryouCollection/shirts.dart';
 import 'package:e_commerce_app/components/foryouCollection/track_suits.dart';
+import 'package:e_commerce_app/screens/cart_screen.dart';
 import 'package:e_commerce_app/widgets/cart&notifi.dart';
 import 'package:e_commerce_app/components/cashback.dart';
 import 'package:e_commerce_app/widgets/categories.dart';
@@ -33,7 +34,9 @@ class DashboardScreen extends StatelessWidget {
                     width: 5,
                   ),
                   CartAndNoticationIcon(
-                      icon: Icons.shopping_cart, onTap: () {}),
+                      icon: Icons.shopping_cart, onTap: () {
+                        Get.to(()=> CartScreen());
+                      }),
                   SizedBox(
                     width: 5,
                   ),

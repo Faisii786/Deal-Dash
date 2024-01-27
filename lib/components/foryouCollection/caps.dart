@@ -5,15 +5,42 @@ import 'package:get/get.dart';
 
 class Caps extends StatefulWidget {
   final List images = [
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt8.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt2.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt3.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt4.jpeg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt6.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt7.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt8.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt9.jpg'),
-    ClothesModel(img: 'assets/images/Man T-Shirts/shirt10.jpg'),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt8.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt2.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt3.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt4.jpeg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt6.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt7.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt8.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt9.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/Man T-Shirts/shirt10.jpg',
+      ontap: () {},
+    ),
   ];
   Caps({super.key});
 

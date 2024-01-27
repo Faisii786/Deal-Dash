@@ -5,11 +5,26 @@ import 'package:get/get.dart';
 
 class Jeans extends StatefulWidget {
   final List images = [
-    ClothesModel(img: 'assets/images/pants/pant1.jpg'),
-    ClothesModel(img: 'assets/images/pants/pant2.jpg'),
-    ClothesModel(img: 'assets/images/pants/pant3.jpg'),
-    ClothesModel(img: 'assets/images/pants/pant4.jpg'),
-    ClothesModel(img: 'assets/images/pants/pant5.jpg'),
+    ClothesModel(
+      img: 'assets/images/pants/pant1.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/pants/pant2.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/pants/pant3.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/pants/pant4.jpg',
+      ontap: () {},
+    ),
+    ClothesModel(
+      img: 'assets/images/pants/pant5.jpg',
+      ontap: () {},
+    ),
   ];
   Jeans({super.key});
 

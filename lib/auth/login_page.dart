@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/auth/forget_password.dart';
 import 'package:e_commerce_app/auth/signup.dart';
 import 'package:e_commerce_app/screens/bottom_navBar.dart';
 import 'package:e_commerce_app/utility/colors.dart';
@@ -133,7 +134,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(() => ForgetPassword());
+                          },
                           child: Text(
                             "Forget Password?",
                             style: GoogleFonts.roboto(
@@ -159,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Not a member yet ? ",
+                          "Didn't have an account ? ",
                           style: GoogleFonts.roboto(
                               color: AppColors().whiteColor, fontSize: 15),
                         ),

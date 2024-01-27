@@ -18,11 +18,6 @@ class OffersHeadings extends StatelessWidget {
               fontSize: 20,
               fontWeight: FontWeight.bold),
         ),
-        Text(
-          "See More",
-          style:
-              GoogleFonts.roboto(color: AppColors().greykColor, fontSize: 16),
-        ),
       ],
     );
   }
