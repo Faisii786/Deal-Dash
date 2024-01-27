@@ -1,11 +1,17 @@
+import 'package:e_commerce_app/components/foryouCollection/caps.dart';
+import 'package:e_commerce_app/components/foryouCollection/hoddies.dart';
+import 'package:e_commerce_app/components/foryouCollection/jeans.dart';
+import 'package:e_commerce_app/components/foryouCollection/shirts.dart';
+import 'package:e_commerce_app/components/foryouCollection/track_suits.dart';
 import 'package:e_commerce_app/widgets/cart&notifi.dart';
-import 'package:e_commerce_app/widgets/cashback.dart';
+import 'package:e_commerce_app/components/cashback.dart';
 import 'package:e_commerce_app/widgets/categories.dart';
 import 'package:e_commerce_app/widgets/offerHeadings.dart';
 import 'package:e_commerce_app/widgets/popular_products.dart';
 import 'package:e_commerce_app/widgets/search_textfield.dart';
-import 'package:e_commerce_app/widgets/special_for_you.dart';
+import 'package:e_commerce_app/components/special_for_you.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -77,34 +83,43 @@ class DashboardScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    SpecialforYou(),
+                    SpecialforYou(
+                        ontap: () {
+                          Get.to(() => ManTShirts());
+                        },
+                        img: 'assets/images/Man T-Shirts/shirt7.jpg'),
                     SizedBox(
                       width: 5,
                     ),
-                    SpecialforYou(),
+                    SpecialforYou(
+                        ontap: () {
+                          Get.to(() => Hoddies());
+                        },
+                        img: 'assets/images/hoddies/hodBkgrnd.png'),
                     SizedBox(
                       width: 5,
                     ),
-                    SpecialforYou(),
+                    SpecialforYou(
+                        ontap: () {
+                          Get.to(() => Jeans());
+                        },
+                        img: 'assets/images/pants/cardPant.jpg'),
                     SizedBox(
                       width: 5,
                     ),
-                    SpecialforYou(),
+                    SpecialforYou(
+                        ontap: () {
+                          Get.to(() => Caps());
+                        },
+                        img: 'assets/images/Man T-Shirts/shirt7.jpg'),
                     SizedBox(
                       width: 5,
                     ),
-                    SpecialforYou(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SpecialforYou(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SpecialforYou(),
-                    SizedBox(
-                      width: 5,
-                    ),
+                    SpecialforYou(
+                        ontap: () {
+                          Get.to(() => TrackSuits());
+                        },
+                        img: 'assets/images/trackSuits/tr1.png'),
                   ],
                 ),
               ),

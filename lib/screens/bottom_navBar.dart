@@ -1,4 +1,5 @@
-import 'package:e_commerce_app/screens/Dashboard.dart';
+import 'package:e_commerce_app/screens/home_screen.dart';
+import 'package:e_commerce_app/screens/profile_screen.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,7 @@ class _MyBottomNavbarState extends State<MyBottomNavbar> {
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
     Text('Profile Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Settings Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)), // New tab
+    MyProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
