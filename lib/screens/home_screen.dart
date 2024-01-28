@@ -1,18 +1,10 @@
-import 'package:e_commerce_app/components/foryouCollection/caps.dart';
-import 'package:e_commerce_app/components/foryouCollection/hoddies.dart';
-import 'package:e_commerce_app/components/foryouCollection/jeans.dart';
-import 'package:e_commerce_app/components/foryouCollection/shirts.dart';
-import 'package:e_commerce_app/components/foryouCollection/track_suits.dart';
-import 'package:e_commerce_app/screens/cart_screen.dart';
-import 'package:e_commerce_app/widgets/cart&notifi.dart';
+import 'package:e_commerce_app/components/foyou_section.dart';
+import 'package:e_commerce_app/components/popular_products_section.dart';
+import 'package:e_commerce_app/components/section1.dart';
+import 'package:e_commerce_app/components/third_section.dart';
 import 'package:e_commerce_app/components/cashback.dart';
-import 'package:e_commerce_app/widgets/categories.dart';
 import 'package:e_commerce_app/widgets/offerHeadings.dart';
-import 'package:e_commerce_app/widgets/popular_products.dart';
-import 'package:e_commerce_app/widgets/search_textfield.dart';
-import 'package:e_commerce_app/components/special_for_you.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -27,22 +19,7 @@ class DashboardScreen extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              Row(
-                children: [
-                  SearchTextField(),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  CartAndNoticationIcon(
-                      icon: Icons.shopping_cart, onTap: () {
-                        Get.to(()=> CartScreen());
-                      }),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  CartAndNoticationIcon(icon: Icons.notifications, onTap: () {})
-                ],
-              ),
+              Section1(),
               SizedBox(
                 height: 20,
               ),
@@ -50,31 +27,7 @@ class DashboardScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Categories(icon: Icons.gamepad_outlined, catName: 'Game'),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Categories(icon: Icons.payment, catName: 'Bill'),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Categories(
-                        icon: Icons.wallet_giftcard_outlined,
-                        catName: 'Daily Gift'),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Categories(icon: Icons.more_horiz_sharp, catName: 'More'),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-              ),
+              ThirdSection(),
               SizedBox(
                 height: 20,
               ),
@@ -82,50 +35,7 @@ class DashboardScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    SpecialforYou(
-                        ontap: () {
-                          Get.to(() => ManTShirts());
-                        },
-                        img: 'assets/images/Man T-Shirts/shirt7.jpg'),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SpecialforYou(
-                        ontap: () {
-                          Get.to(() => Hoddies());
-                        },
-                        img: 'assets/images/hoddies/hodBkgrnd.png'),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SpecialforYou(
-                        ontap: () {
-                          Get.to(() => Jeans());
-                        },
-                        img: 'assets/images/pants/cardPant.jpg'),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SpecialforYou(
-                        ontap: () {
-                          Get.to(() => Caps());
-                        },
-                        img: 'assets/images/Man T-Shirts/shirt7.jpg'),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    SpecialforYou(
-                        ontap: () {
-                          Get.to(() => TrackSuits());
-                        },
-                        img: 'assets/images/trackSuits/tr1.png'),
-                  ],
-                ),
-              ),
+              SpecialForYouSection(),
               SizedBox(
                 height: 10,
               ),
@@ -133,40 +43,9 @@ class DashboardScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    PopularProducts(),
-                    SizedBox(
-                      width: 5,
-                    ),
-                  ],
-                ),
+              PopuarProductsSection(),
+              SizedBox(
+                height: 30,
               ),
             ],
           ),

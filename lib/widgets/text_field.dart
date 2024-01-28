@@ -6,6 +6,7 @@ class MyTextField extends StatefulWidget {
   final String labelText;
   final IconData icon;
   final TextInputType keyboardType;
+  final TextEditingController? controller;
 
   const MyTextField({
     Key? key,
@@ -13,6 +14,7 @@ class MyTextField extends StatefulWidget {
     required this.labelText,
     required this.icon,
     this.keyboardType = TextInputType.text,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -24,43 +26,30 @@ class _MyTextFieldState extends State<MyTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) {
-        setState(() {
-          isHovered = true;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: Expanded(
-        child: TextFormField(
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.all(0),
-            // contentPadding: const EdgeInsets.all(10),
-            focusedBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            // enabledBorder: const OutlineInputBorder(
-            //   borderSide: BorderSide(color: Colors.white54),
-            // ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(
-                color: isHovered ? Colors.white : Colors.grey,
-              ),
-            ),
-            hintText: widget.hintText,
-            hintStyle:
-                TextStyle(color: AppColors().greykColor.withOpacity(0.8)),
-            labelText: widget.labelText,
-            labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
-          ),
-          keyboardType: widget.keyboardType,
-          style: TextStyle(color: AppColors().whiteColor),
+    return TextFormField(
+      controller: widget.controller,
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.all(0),
+        // contentPadding: const EdgeInsets.all(10),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white),
         ),
+        // enabledBorder: const OutlineInputBorder(
+        //   borderSide: BorderSide(color: Colors.white54),
+        // ),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: isHovered ? Colors.white : Colors.grey,
+          ),
+        ),
+        hintText: widget.hintText,
+        hintStyle:
+            TextStyle(color: AppColors().greykColor.withOpacity(0.8)),
+        labelText: widget.labelText,
+        labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
       ),
+      keyboardType: widget.keyboardType,
+      style: TextStyle(color: AppColors().whiteColor),
     );
   }
 }

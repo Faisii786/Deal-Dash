@@ -33,7 +33,7 @@ class _ReturnCustomMaterialState extends State<ReturnCustomMaterial> {
           border: Border.all(width: 2),
           image: DecorationImage(
             image: AssetImage(widget.clothes.img),
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
           ),
           borderRadius: BorderRadius.circular(10),
           color: AppColors().backgroundColor,

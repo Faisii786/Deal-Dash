@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 
+// ignore: must_be_immutable
 class MyButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  bool loading;
 
-  const MyButton({super.key, 
+  MyButton({
+    super.key,
     required this.text,
     required this.onPressed,
+    this.loading = false,
   });
 
   @override
@@ -22,14 +26,16 @@ class MyButton extends StatelessWidget {
       height: 50,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: GoogleFonts.lato(
-            color: AppColors().blackColor,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: loading
+            ? CircularProgressIndicator()
+            : Text(
+                text,
+                style: GoogleFonts.lato(
+                  color: AppColors().blackColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
       ),
     );
   }

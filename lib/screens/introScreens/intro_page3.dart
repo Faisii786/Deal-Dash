@@ -16,7 +16,7 @@ class introPage3 extends StatelessWidget {
         ),
         child: Center(
           child: Image.asset(
-            "assets/images/intro_pages/intro4.png",
+            "assets/images/splash_3.png",
             width: 200,
           ),
         ),
