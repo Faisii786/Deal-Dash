@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/Model/clothes_model.dart';
-import 'package:e_commerce_app/components/foryouCollection/shirt_detal.dart';
+import 'package:e_commerce_app/components/foryouCollection/shirt_detail.dart';
 import 'package:e_commerce_app/widgets/foryou_collection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

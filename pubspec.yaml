@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.6
   firebase_auth: ^4.16.0
   google_fonts: ^6.1.0
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +70,7 @@ flutter:
     - assets/images/pants/
     - assets/images/hoddies/
     - assets/images/trackSuits/
+    - assets/images/intro_pages/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

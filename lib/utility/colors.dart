@@ -8,4 +8,5 @@ class AppColors {
   final blackColor = Colors.black;
   final greykColor = Colors.grey;
   final SearchTextFieldbkgrnClr = Color.fromARGB(255, 206, 205, 205);
+  final addToCart = Color.fromARGB(255, 216, 106, 2);
 }
