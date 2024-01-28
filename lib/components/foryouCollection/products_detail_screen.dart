@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/Model/cart_model.dart';
+import 'package:e_commerce_app/State%20Managment/state_managment.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/addToCartButton.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +12,11 @@ class ProductsDetailScreen extends StatefulWidget {
 }
 
 class _ProductsDetailScreenState extends State<ProductsDetailScreen> {
-  bool _fav = false;
-
-  void _toggleFavorite() {
-    setState(() {
-      _fav = !_fav;
-    });
-  }
+  final stateController controller = Get.put(stateController());
 
   @override
   Widget build(BuildContext context) {
+    print("rebuild");
     return SafeArea(
       child: Scaffold(
         body: CustomScrollView(
@@ -48,15 +43,19 @@ class _ProductsDetailScreenState extends State<ProductsDetailScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: GestureDetector(
-                    onTap: () {
-                      _toggleFavorite();
-                    },
-                    child: Icon(
-                      _fav ? Icons.favorite_outline : Icons.favorite,
-                      color: _fav ? AppColors().blackColor : Colors.red,
-                      size: 25,
-                    ),
-                  ),
+                      onTap: () {
+                        controller.toogleFavorite();
+                      },
+                      child: Obx(
+                        () => Icon(
+                          controller.fav.isFalse
+                              ? Icons.favorite_outline
+                              : Icons.favorite,
+                          color:
+                              controller.fav.isTrue ? Colors.red : Colors.black,
+                          size: 25,
+                        ),
+                      )),
                 ),
               ],
             ),
@@ -151,11 +150,7 @@ class _ProductsDetailScreenState extends State<ProductsDetailScreen> {
                           style: TextStyle(fontSize: 18),
                         ),
                         SizedBox(height: 20),
-                        AddToCartButton(
-                            text: 'Add to Cart',
-                            onPressed: () {
-                              cart.addToCart(Product(name: 'Shirt', price: 4));
-                            }),
+                        AddToCartButton(text: 'Add to Cart', onPressed: () {}),
                       ],
                     ),
                   ),
