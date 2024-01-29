@@ -15,11 +15,10 @@ class Section1 extends StatelessWidget {
         SizedBox(
           width: 5,
         ),
-        CartAndNoticationIcon(icon: Icons.shopping_cart, onTap: () {}),
+        CartAndNoticationIcon(icon: Icons.favorite_outline, onTap: () {}),
         SizedBox(
           width: 5,
         ),
-        CartAndNoticationIcon(icon: Icons.notifications, onTap: () {})
       ],
     );
   }

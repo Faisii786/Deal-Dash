@@ -1,5 +1,5 @@
+import 'package:e_commerce_app/auth/login_page.dart';
 import 'package:e_commerce_app/firebase_options.dart';
-import 'package:e_commerce_app/screens/bottom_navBar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Deal Dash',
       theme: ThemeData.light(),
-      home: MyBottomNavbar(),
+      home: LoginPage(),
     );
   }
 }

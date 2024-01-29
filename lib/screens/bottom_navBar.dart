@@ -1,7 +1,9 @@
+import 'package:e_commerce_app/State%20Managment/state_managment.dart';
 import 'package:e_commerce_app/screens/home_screen.dart';
 import 'package:e_commerce_app/screens/profile_screen.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyBottomNavbar extends StatefulWidget {
   @override
@@ -9,11 +11,13 @@ class MyBottomNavbar extends StatefulWidget {
 }
 
 class _MyBottomNavbarState extends State<MyBottomNavbar> {
+  stateController controller = Get.put(stateController());
+
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
     DashboardScreen(),
-    Text('Search Page',
+    Text('Favorite Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
     Text('Profile Page',
         style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
@@ -38,18 +42,36 @@ class _MyBottomNavbarState extends State<MyBottomNavbar> {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(20), topRight: Radius.circular(10))),
           child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_outline),
-                label: 'Fav',
+                icon: Stack(
+                  children: [
+                    Center(child: Icon(Icons.shopping_cart)),
+                    Container(
+                        margin: EdgeInsets.only(
+                          left: 40,
+                        ),
+                        child: Center(
+                            child: Obx(
+                          () => Text(
+                            controller.count.toString(),
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15),
+                          ),
+                        )))
+                  ],
+                ),
+                label: 'Cart',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.message_outlined),
-                label: 'Msg',
+                icon: Icon(Icons.notifications),
+                label: 'Notify',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person_2_outlined),
