@@ -1,24 +1,83 @@
-import 'package:e_commerce_app/Model/cart_model.dart';
-import 'package:e_commerce_app/State%20Managment/state_managment.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
+import 'package:e_commerce_app/screens/bottom_navBar.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/addToCartButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
-class ProductsDetailScreenWdget extends StatelessWidget {
-  final List mouseData = [
-    ProductData(
-        img: 'assets/images/ps4_console_white_1.png',
-        name: 'Wireless Controller for PS4',
-        price: '122.6\$ - 334.0\$',
-        rating: '5.0')
-  ];
-  ProductsDetailScreenWdget({
+// ignore: must_be_immutable
+class ProductsDetailScreenWidget extends StatefulWidget {
+  final String img;
+  final String rating;
+  final String name;
+  final String price;
+
+  ProductsDetailScreenWidget({
     super.key,
     required this.controller,
+    required this.img,
+    required this.rating,
+    required this.name,
+    required this.price,
   });
 
-  final stateController controller;
+  final toggleFav controller;
+
+  @override
+  State<ProductsDetailScreenWidget> createState() =>
+      _ProductsDetailScreenWidgetState();
+}
+
+class _ProductsDetailScreenWidgetState
+    extends State<ProductsDetailScreenWidget> {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future addToCart() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+
+      var id = Uuid().v1();
+
+      DocumentSnapshot cartSnapshot =
+          await _firestore.collection("productsData").doc(id).get();
+
+      if (cartSnapshot.exists) {
+        Get.snackbar("erro", "already error");
+      } else {
+        await _firestore.collection("productsData").doc(id).set({
+          'id': id,
+          "image": widget.img,
+          'rating': widget.rating,
+          'name': widget.name,
+          'price': widget.price,
+        }).then((value) => {
+              Get.snackbar("Added", 'Data is successfully added to cart',
+                  duration: Duration(seconds: 3)),
+              setState(() {
+                loading = true;
+              }),
+              Get.to(() => MyBottomNavbar()),
+            });
+      }
+    } on FirebaseException catch (err) {
+      Get.snackbar("Error", err.toString(),
+          snackPosition: SnackPosition.BOTTOM);
+      setState(() {
+        loading = false;
+      });
+    } catch (e) {
+      Get.snackbar("Error", e.toString(), snackPosition: SnackPosition.BOTTOM);
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +96,12 @@ class ProductsDetailScreenWdget extends StatelessWidget {
           expandedHeight: Get.height * 0.5,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
-            background: Image.asset(
-              "assets/images/ps4_console_white_1.png",
-              fit: BoxFit.contain,
+            background: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Image.asset(
+                widget.img,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
           actions: [
@@ -47,15 +109,17 @@ class ProductsDetailScreenWdget extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  controller.toogleFavorite();
-                  controller.increaseFavCount();
+                  widget.controller.toogleFavorite();
+                  widget.controller.increaseFavCount();
                 },
                 child: Obx(
                   () => Icon(
-                    controller.fav.isFalse
+                    widget.controller.fav.isFalse
                         ? Icons.favorite_outline
                         : Icons.favorite,
-                    color: controller.fav.isTrue ? Colors.red : Colors.black,
+                    color: widget.controller.fav.isTrue
+                        ? Colors.red
+                        : Colors.black,
                     size: 25,
                   ),
                 ),
@@ -64,13 +128,10 @@ class ProductsDetailScreenWdget extends StatelessWidget {
           ],
         ),
         SliverToBoxAdapter(
-          child: Card(
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 231, 230, 230),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20))),
+          child: Container(
+            height: Get.height,
+            child: Card(
+              margin: EdgeInsets.all(0),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -79,23 +140,11 @@ class ProductsDetailScreenWdget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              "5.0",
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(
-                              Icons.star,
-                              size: 30,
-                              color: Colors.orange,
-                            ),
-                          ],
+                        Text(
+                          widget.rating,
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
@@ -113,7 +162,7 @@ class ProductsDetailScreenWdget extends StatelessWidget {
                       height: 2,
                     ),
                     Text(
-                      'Wireless Controller for PS4',
+                      widget.name,
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -122,7 +171,7 @@ class ProductsDetailScreenWdget extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      '122.6\$ - 334.0\$',
+                      widget.price,
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -154,7 +203,12 @@ class ProductsDetailScreenWdget extends StatelessWidget {
                       style: TextStyle(fontSize: 18),
                     ),
                     SizedBox(height: 20),
-                    AddToCartButton(text: 'Add to Cart', onPressed: () {}),
+                    AddToCartButton(
+                        loading: loading,
+                        text: 'Add to Cart',
+                        onPressed: () {
+                          addToCart();
+                        }),
                   ],
                 ),
               ),

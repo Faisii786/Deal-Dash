@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/Model/clothes_model.dart';
+import 'package:e_commerce_app/Model/products_model.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,25 +33,12 @@ class _ReturnCustomMaterialState extends State<ReturnCustomMaterial> {
           border: Border.all(width: 2),
           image: DecorationImage(
             image: AssetImage(widget.clothes.img),
-            fit: BoxFit.contain,
           ),
           borderRadius: BorderRadius.circular(10),
           color: AppColors().backgroundColor,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5),
-          // child: Align(
-          //   alignment: Alignment.topRight,
-          //   child: GestureDetector(
-          //     onTap: () {
-          //       _toggleFavorite();
-          //     },
-          //     child: Icon(
-          //       _fav ? Icons.favorite : Icons.favorite_outline,
-          //       color: _fav ? Colors.red : Colors.white,
-          //     ),
-          //   ),
-          // ),
         ),
       ),
     );

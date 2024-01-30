@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/components/foryouCollection/hoddies.dart';
-import 'package:e_commerce_app/components/foryouCollection/mouse_purple.dart';
-import 'package:e_commerce_app/components/foryouCollection/mouse_white.dart';
+import 'package:e_commerce_app/components/foryouCollection/shoes.dart';
+import 'package:e_commerce_app/components/foryouCollection/headsets.dart';
 import 'package:e_commerce_app/components/special_for_you.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

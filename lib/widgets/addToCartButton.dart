@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_commerce_app/utility/colors.dart';
@@ -5,11 +7,13 @@ import 'package:e_commerce_app/utility/colors.dart';
 class AddToCartButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  bool loading;
 
-  const AddToCartButton({
+  AddToCartButton({
     super.key,
     required this.text,
     required this.onPressed,
+    this.loading = false,
   });
 
   @override
@@ -23,13 +27,18 @@ class AddToCartButton extends StatelessWidget {
       height: 50,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: GoogleFonts.lato(
-            color: AppColors().whiteColor,
-            fontSize: 20,
-          ),
-        ),
+        child: loading
+            ? CircularProgressIndicator(
+                strokeWidth: 3,
+                color: Colors.white,
+              )
+            : Text(
+                text,
+                style: GoogleFonts.lato(
+                  color: AppColors().whiteColor,
+                  fontSize: 20,
+                ),
+              ),
       ),
     );
   }

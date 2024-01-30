@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/State%20Managment/state_managment.dart';
+import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,7 +10,7 @@ class CartAndNoticationIcon extends StatelessWidget {
 
   CartAndNoticationIcon({required this.icon, required this.onTap});
 
-  stateController controller = Get.put(stateController());
+  toggleFav controller = Get.put(toggleFav());
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

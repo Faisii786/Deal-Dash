@@ -2,19 +2,15 @@ import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class stateController extends GetxController {
+class toggleFav extends GetxController {
   RxBool fav = false.obs;
   RxInt count = 0.obs;
+  
 
   toogleFavorite() {
     fav.value = !fav.value;
     print(fav.value);
   }
-
-  // toogeleUnfavourite() {
-  //   count.value--;
-  //   print(count.value);
-  // }
 
   increaseFavCount() {
     if (fav.value == true) {
@@ -44,8 +40,7 @@ class stateController extends GetxController {
         margin: EdgeInsets.only(bottom: 10),
       );
     }
-    // fav.value = false;
-    // count.value++;
-    // print(count.value);
+
+    
   }
 }

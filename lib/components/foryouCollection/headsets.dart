@@ -1,5 +1,4 @@
-import 'package:e_commerce_app/Model/clothes_model.dart';
-import 'package:e_commerce_app/components/foryouCollection/products_detail_screen.dart';
+import 'package:e_commerce_app/Model/products_model.dart';
 import 'package:e_commerce_app/widgets/foryou_collection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,21 +6,21 @@ import 'package:get/get.dart';
 class WhiteMouse extends StatefulWidget {
   final List<ClothesModel> images = [
     ClothesModel(
-      img: 'assets/images/ps4_console_white_1.png',
+      img: 'assets/images/mouse/mouse1.png',
       ontap: () {
-        Get.to(() => ProductsDetailScreen());
+        
       },
     ),
     ClothesModel(
-      img: 'assets/images/ps4_console_white_2.png',
+      img: 'assets/images/mouse/mouse2.png',
       ontap: () {},
     ),
     ClothesModel(
-      img: 'assets/images/ps4_console_white_3.png',
+      img: 'assets/images/mouse/mouse3.png',
       ontap: () {},
     ),
     ClothesModel(
-      img: 'assets/images/ps4_console_white_4.png',
+      img: 'assets/images/mouse/mouse4.png',
       ontap: () {},
     ),
   ];
@@ -44,7 +43,7 @@ class _WhiteMouseState extends State<WhiteMouse> {
           icon: Icon(Icons.arrow_back_ios),
         ),
         automaticallyImplyLeading: false,
-        title: Text("Man Shirts"),
+        title: Text("HeadSet"),
         centerTitle: true,
       ),
       body: Padding(

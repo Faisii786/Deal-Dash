@@ -1,18 +1,16 @@
-import 'package:e_commerce_app/components/foryouCollection/products_detail_screen.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularProducts extends StatelessWidget {
   final String img;
-  const PopularProducts({super.key, required this.img});
+  final VoidCallback onTap;
+  const PopularProducts({super.key, required this.img, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.to(() => ProductsDetailScreen());
-      },
+      onTap: onTap,
       child: Container(
         height: 180,
         width: Get.width * 0.5,
@@ -21,7 +19,10 @@ class PopularProducts extends StatelessWidget {
           color: AppColors().SearchTextFieldbkgrnClr,
         ),
         child: Center(
-          child: Image.asset(img),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Image.asset(img),
+          ),
         ),
       ),
     );

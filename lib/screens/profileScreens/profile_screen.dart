@@ -1,6 +1,9 @@
+import 'package:e_commerce_app/auth/login_page.dart';
+import 'package:e_commerce_app/screens/profileScreens/my_account.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/profile_container.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyProfileScreen extends StatelessWidget {
@@ -34,7 +37,8 @@ class MyProfileScreen extends StatelessWidget {
                 height: 10,
               ),
               CircleAvatar(
-                radius: 60,
+                backgroundImage: AssetImage("assets/images/dprofile.png"),
+                radius: 80,
                 backgroundColor: AppColors().SearchTextFieldbkgrnClr,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -54,7 +58,9 @@ class MyProfileScreen extends StatelessWidget {
               ProfileContainer(
                   icon: Icons.person_2_outlined,
                   title: 'My Account',
-                  ontap: () {}),
+                  ontap: () {
+                    Get.to(() => MyAccount());
+                  }),
               SizedBox(
                 height: 20,
               ),
@@ -78,7 +84,43 @@ class MyProfileScreen extends StatelessWidget {
                 height: 20,
               ),
               ProfileContainer(
-                  icon: Icons.logout_outlined, title: 'Log Out', ontap: () {}),
+                  icon: Icons.logout_outlined,
+                  title: 'Log Out',
+                  ontap: () {
+                    Get.defaultDialog(
+                      titlePadding: EdgeInsets.only(top: 10),
+                      titleStyle: TextStyle(fontSize: 20),
+                      radius: 10,
+                      content: Text(
+                        "Are you sure you want to logout ?",
+                        style: TextStyle(fontSize: 18),
+                        textAlign: TextAlign.center,
+                      ),
+                      confirm: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child:
+                                    Text("No", style: TextStyle(fontSize: 17))),
+                            GestureDetector(
+                                onTap: () {
+                                  Get.off(() => LoginPage());
+                                },
+                                child: Text(
+                                  "Yes",
+                                  style:
+                                      TextStyle(color: Colors.red, fontSize: 17),
+                                )),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
               SizedBox(
                 height: 20,
               ),

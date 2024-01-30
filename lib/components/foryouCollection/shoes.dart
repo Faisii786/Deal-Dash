@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/Model/clothes_model.dart';
+import 'package:e_commerce_app/Model/products_model.dart';
 import 'package:e_commerce_app/widgets/foryou_collection_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,19 +6,19 @@ import 'package:get/get.dart';
 class PurpleMouse extends StatefulWidget {
   final List images = [
     ClothesModel(
-      img: 'assets/images/ps4_console_blue_1.png',
+      img: 'assets/images/mouse/mouse5.png',
       ontap: () {},
     ),
     ClothesModel(
-      img: 'assets/images/ps4_console_blue_2.png',
+      img: 'assets/images/mouse/mouse6.png',
       ontap: () {},
     ),
     ClothesModel(
-      img: 'assets/images/ps4_console_blue_3.png',
+      img: 'assets/images/mouse/mouse7.png',
       ontap: () {},
     ),
     ClothesModel(
-      img: 'assets/images/ps4_console_blue_4.png',
+      img: 'assets/images/mouse/mouse8.png',
       ontap: () {},
     ),
   ];
@@ -39,7 +39,7 @@ class _PurpleMouseState extends State<PurpleMouse> {
             },
             icon: Icon(Icons.arrow_back_ios)),
         automaticallyImplyLeading: false,
-        title: Text("Man Shirts"),
+        title: Text("Man Shoes"),
         centerTitle: true,
       ),
       body: Padding(
