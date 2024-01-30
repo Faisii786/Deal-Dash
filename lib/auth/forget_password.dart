@@ -36,15 +36,20 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       setState(() {
         loading = true;
       });
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: emailcontroller.text.toString())
-          .then((value) {
-        showSnakBar("We have Send to email ! Please Check Your email");
-        emailcontroller.clear();
-        setState(() {
-          loading = false;
+
+      if (FirebaseAuth.instance.currentUser!.email != null) {
+        await FirebaseAuth.instance
+            .sendPasswordResetEmail(email: emailcontroller.text.toString())
+            .then((value) {
+          showSnakBar("We have Send to email ! Please Check Your email");
+          emailcontroller.clear();
+          setState(() {
+            loading = false;
+          });
         });
-      });
+      } else {
+        showSnakBar("No user found");
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
         showSnakBar("Invalid Credentials ! Please enter valid email");

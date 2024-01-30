@@ -2,6 +2,7 @@ import 'package:e_commerce_app/auth/login_page.dart';
 import 'package:e_commerce_app/screens/profileScreens/my_account.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/profile_container.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -74,7 +75,9 @@ class MyProfileScreen extends StatelessWidget {
               ProfileContainer(
                   icon: Icons.settings_outlined,
                   title: 'Settings',
-                  ontap: () {}),
+                  ontap: () {
+                    print(FirebaseAuth.instance.currentUser!.email.toString());
+                  }),
               SizedBox(
                 height: 20,
               ),
@@ -113,8 +116,8 @@ class MyProfileScreen extends StatelessWidget {
                                 },
                                 child: Text(
                                   "Yes",
-                                  style:
-                                      TextStyle(color: Colors.red, fontSize: 17),
+                                  style: TextStyle(
+                                      color: Colors.red, fontSize: 17),
                                 )),
                           ],
                         ),

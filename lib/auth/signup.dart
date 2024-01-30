@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/State%20Managment/image_picker.dart';
 import 'package:e_commerce_app/auth/login_page.dart';
+import 'package:e_commerce_app/auth/verfiy_screen.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:e_commerce_app/widgets/button.dart';
 import 'package:e_commerce_app/widgets/text_field.dart';
@@ -19,9 +20,18 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  bool isChecked = false;
+  // for phone
+  TextEditingController phonecontroller = TextEditingController();
+  TextEditingController countrycontroller = TextEditingController();
+  final SnakBarKey = GlobalKey<ScaffoldMessengerState>();
+  bool isHovered = false;
+  String countryvalue = '';
+  //
 
+  bool isChecked = false;
   GlobalKey<FormState> MyKey = GlobalKey();
+
+  // for mail
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController firstnamecontroller = TextEditingController();
   TextEditingController lastnamecontroller = TextEditingController();
@@ -36,6 +46,8 @@ class _SignUpPageState extends State<SignUpPage> {
     } else if (emailcontroller.text.isEmpty) {
       showSnakBar("Email is Empty");
       return;
+    } else if (phonecontroller.text.isEmpty) {
+      showSnakBar("Phone is Empty");
     } else if (!isValidEmail(emailcontroller.text)) {
       showSnakBar("Please Enter a valid email");
     } else if (passwordcontroller.text.isEmpty) {
@@ -55,11 +67,39 @@ class _SignUpPageState extends State<SignUpPage> {
         loading = true;
       });
 
+      // create user
       UserCredential cred =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailcontroller.text,
         password: passwordcontroller.text,
       );
+
+      // phone authentication
+      String fullphonenumber = '+' + countryvalue + phonecontroller.text;
+      FirebaseAuth.instance.verifyPhoneNumber(
+          phoneNumber: fullphonenumber,
+          verificationCompleted: (PhoneAuthCredential credential) async {
+            await FirebaseAuth.instance.signInWithCredential(credential);
+          },
+          verificationFailed: (FirebaseAuthException e) {
+            showSnakBar("$e");
+            setState(() {
+              loading = false;
+            });
+          },
+          codeSent: (String verificationId, int? token) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        VerifyPhoneNumber(verificationIddd: verificationId)));
+          },
+          codeAutoRetrievalTimeout: (e) {
+            showSnakBar("$e");
+            setState(() {
+              loading = false;
+            });
+          });
 
       await FirebaseFirestore.instance
           .collection("users")
@@ -69,13 +109,14 @@ class _SignUpPageState extends State<SignUpPage> {
         "image": _controller.imgPath.toString(),
         "FirstName": firstnamecontroller.text,
         "LastName": lastnamecontroller.text,
+        "phone": phonecontroller.text,
         "email": emailcontroller.text,
         "password": passwordcontroller.text,
       });
 
-      showSnakBar("Account Created Successfully");
       firstnamecontroller.clear();
       lastnamecontroller.clear();
+      phonecontroller.clear();
       emailcontroller.clear();
       passwordcontroller.clear();
       setState(() {
@@ -102,8 +143,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
     SnakBarKey.currentState?.showSnackBar(snakbar);
   }
-
-  final SnakBarKey = GlobalKey<ScaffoldMessengerState>();
 
   imagePickerController _controller = Get.put(imagePickerController());
   @override
@@ -142,7 +181,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             _controller.imagePick();
                           },
                           child: CircleAvatar(
-                            radius: 70,
+                            radius: 50,
                             backgroundImage: _controller.imgPath.isNotEmpty
                                 ? FileImage(
                                     File(_controller.imgPath.toString()))
@@ -152,6 +191,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     );
                   }),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment:
@@ -177,6 +219,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: GoogleFonts.montserrat(
                             color: AppColors().whiteColor, fontSize: 30),
                       ),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: MyTextField(
@@ -193,6 +238,21 @@ class _SignUpPageState extends State<SignUpPage> {
                             labelText: 'Last Name',
                             icon: Icons.person),
                       ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: MyTextField(
+                            controller: phonecontroller,
+                            hintText: '+92 must with country code ',
+                            labelText: 'Enter phone',
+                            icon: Icons.person),
+                      ),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
+                      // phone_number_container(context),
+                      // SizedBox(
+                      //   height: 10,
+                      // ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: MyTextField(
@@ -257,3 +317,76 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 }
+
+//   Row phone_number_container(BuildContext context) {
+//     return Row(
+//       children: [
+//         SizedBox(
+//           width: 60,
+//           child: TextFormField(
+//             controller: countrycontroller,
+//             decoration: InputDecoration(
+//                 contentPadding: const EdgeInsets.all(0),
+//                 focusedBorder: const UnderlineInputBorder(
+//                   borderSide: BorderSide(color: Colors.white),
+//                 ),
+//                 enabledBorder: UnderlineInputBorder(
+//                   borderSide: BorderSide(
+//                     color: isHovered ? Colors.white : Colors.grey,
+//                   ),
+//                 ),
+//                 hintStyle:
+//                     TextStyle(color: AppColors().greykColor.withOpacity(0.8)),
+//                 labelStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
+//                 prefixIcon: TextButton(
+//                   onPressed: () {
+//                     showCountryPicker(
+//                       favorite: ['PK'],
+//                       countryListTheme: CountryListThemeData(
+//                           backgroundColor: Colors.grey[300],
+//                           bottomSheetHeight: 400,
+//                           flagSize: 20,
+//                           inputDecoration: InputDecoration(
+//                               hintText: 'Enter Country Name',
+//                               labelText: 'Search Country'),
+//                           borderRadius: BorderRadius.only(
+//                             topRight: Radius.circular(5),
+//                             topLeft: Radius.circular(5),
+//                           )),
+//                       context: context,
+//                       onSelect: (Country country) {
+//                         countryvalue = country.phoneCode;
+//                         setState(() {});
+//                       },
+//                     );
+//                   },
+//                   child: Text(
+//                     "+$countryvalue",
+//                     style: TextStyle(color: Colors.white.withOpacity(0.8)),
+//                   ),
+//                 )),
+//           ),
+//         ),
+//         Expanded(
+//           child: TextFormField(
+//             controller: phonecontroller,
+//             keyboardType: TextInputType.phone,
+//             decoration: InputDecoration(
+//               contentPadding: const EdgeInsets.all(0),
+//               focusedBorder: const UnderlineInputBorder(
+//                 borderSide: BorderSide(color: Colors.white),
+//               ),
+//               enabledBorder: UnderlineInputBorder(
+//                 borderSide: BorderSide(
+//                   color: isHovered ? Colors.white : Colors.grey,
+//                 ),
+//               ),
+//               hintText: 'Enter Phone',
+//               hintStyle: TextStyle(color: Colors.white.withOpacity(0.8)),
+//             ),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

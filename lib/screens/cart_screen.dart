@@ -65,6 +65,7 @@ class MyCartScreen extends StatelessWidget {
                               child: Image.asset(
                                 imageUrl,
                                 width: Get.width * 0.3,
+                                //height: Get.height * 0.15,
                               ),
                             ),
                           )),
@@ -87,6 +88,13 @@ class MyCartScreen extends StatelessWidget {
                                 color: Colors.red, fontWeight: FontWeight.bold),
                           ),
                           Text(data['rating']),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Icon(
+                              Icons.delete,
+                              color: const Color.fromARGB(255, 68, 67, 67),
+                            ),
+                          )
                         ],
                       ),
                     ],

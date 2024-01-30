@@ -1,9 +1,6 @@
-import 'dart:async';
-
-import 'package:e_commerce_app/screens/introScreens/intro_page1.dart';
+import 'package:e_commerce_app/screens/splash_screen/splash_services.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,12 +10,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  CheckUserState splashServices = CheckUserState();
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Get.to(() => introPage1());
-    });
+    splashServices.islogin(context);
   }
 
   @override

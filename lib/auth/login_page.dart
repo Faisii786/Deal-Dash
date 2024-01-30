@@ -51,8 +51,8 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text,
         password: passwordController.text,
       );
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MyBottomNavbar()));
+      Get.off(() => MyBottomNavbar());
+
       emailController.clear();
       passwordController.clear();
       setState(() {
@@ -107,7 +107,9 @@ class _LoginPageState extends State<LoginPage> {
             padding:
                 const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 20),
             child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Align(
                     alignment: Alignment.topRight,
@@ -121,7 +123,6 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                   ),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Start content
                     children: [
@@ -151,6 +152,9 @@ class _LoginPageState extends State<LoginPage> {
                         "Login",
                         style: GoogleFonts.montserrat(
                             color: AppColors().whiteColor, fontSize: 30),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                       Container(
                         width: double.infinity,

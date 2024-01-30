@@ -13,8 +13,6 @@ class MyAccount extends StatefulWidget {
 class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext context) {
-    bool isDark = true;
-
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
