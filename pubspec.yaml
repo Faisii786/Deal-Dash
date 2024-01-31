@@ -44,6 +44,7 @@ dependencies:
   uuid: ^4.3.3
   image_picker: ^1.0.7
   country_picker: ^2.0.24
+  firebase_storage: ^11.6.0
 
 dev_dependencies:
   flutter_test:
@@ -85,10 +86,14 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Muli1
+      fonts:
+        - asset: assets/fonts/Muli-Bold.ttf
+    - family: Muli6
+      fonts:
+        - asset: assets/fonts/Muli.ttf
+    
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

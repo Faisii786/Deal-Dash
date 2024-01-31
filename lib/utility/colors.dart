@@ -9,4 +9,5 @@ class AppColors {
   final greykColor = Colors.grey;
   final SearchTextFieldbkgrnClr = Color.fromARGB(255, 206, 205, 205);
   final addToCart = Color.fromARGB(255, 216, 106, 2);
+  final iosArrowBack = Color.fromARGB(255, 128, 128, 128);
 }
