@@ -9,19 +9,18 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Deal Dash',
-      theme: ThemeData.light(),
-      home: SplashScreen()
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Deal Dash',
+        theme: ThemeData.light(),
+        home: SplashScreen());
   }
 }

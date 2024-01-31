@@ -43,12 +43,20 @@ dependencies:
   cloud_firestore: ^4.14.0
   uuid: ^4.3.3
   image_picker: ^1.0.7
-  country_picker: ^2.0.24
   firebase_storage: ^11.6.0
+  stylish_bottom_bar: ^1.0.3
+  carousel_slider: ^4.2.1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 21
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -74,6 +82,7 @@ flutter:
     - assets/images/hoddies/
     - assets/images/mouse/
     - assets/images/payment/
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

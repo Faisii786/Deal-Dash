@@ -1,10 +1,18 @@
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
 import 'package:e_commerce_app/utility/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class MyCartScreen extends StatelessWidget {
+class MyCartScreen extends StatefulWidget {
+  @override
+  State<MyCartScreen> createState() => _MyCartScreenState();
+}
+
+class _MyCartScreenState extends State<MyCartScreen> {
+  final userID = FirebaseAuth.instance.currentUser!.uid;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,8 +28,10 @@ class MyCartScreen extends StatelessWidget {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream:
-            FirebaseFirestore.instance.collection('productsData').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection('productsData')
+            .where('id', isEqualTo: userID)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -89,7 +99,23 @@ class MyCartScreen extends StatelessWidget {
                           ),
                           Text(data['rating']),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () async {
+                              print(userID);
+                              try {
+                                await FirebaseFirestore.instance
+                                    .collection("productsData")
+                                    .doc(userID)
+                                    .delete();
+
+                                setState(() {});
+
+                                Get.snackbar("Deleted", "Product is Deleted");
+                              } catch (error) {
+                                print("Error deleting product: $error");
+                                Get.snackbar(
+                                    "Error", "Failed to delete product");
+                              }
+                            },
                             child: Icon(
                               Icons.delete,
                               color: const Color.fromARGB(255, 68, 67, 67),

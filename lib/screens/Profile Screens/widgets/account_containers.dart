@@ -1,12 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
 class account_containers extends StatelessWidget {
   final IconData icon;
   final String name;
-  const account_containers({
+  bool hide;
+
+  account_containers({
     super.key,
     required this.icon,
     required this.name,
+    this.hide = false,
   });
 
   @override

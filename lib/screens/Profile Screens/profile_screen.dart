@@ -33,7 +33,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -69,7 +69,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   }
                 },
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 30),
               ProfileContainer(
                 icon: Icons.person_outline,
                 title: 'My Account',
