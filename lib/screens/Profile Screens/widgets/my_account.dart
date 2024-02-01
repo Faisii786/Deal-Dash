@@ -82,15 +82,28 @@ class _MyAccountState extends State<MyAccount> {
                             SizedBox(
                               height: 20,
                             ),
+                            
                             account_containers(
-                                icon: Icons.email_outlined,
-                                name: UserData['email']),
+                                icon: Icons.call_outlined,
+                                name: UserData['phone']),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            account_containers(
+                                icon: Icons.location_city_outlined,
+                                name: UserData['country']),
                             SizedBox(
                               height: 20,
                             ),
                             // account_containers(
                             //     icon: Icons.password_outlined,
                             //     name: UserData['password']),
+                            account_containers(
+                                icon: Icons.email_outlined,
+                                name: UserData['email']),
+                            SizedBox(
+                              height: 20,
+                            ),
                             account_containers(
                                 icon: Icons.password_outlined,
                                 name: '********'),

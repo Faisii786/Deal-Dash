@@ -9,7 +9,6 @@ class MyCaraousalSlider extends StatelessWidget {
     'assets/images/Image Banner 2.png',
     'assets/images/Image Banner 3.png',
     'assets/images/Image Banner 2.png',
-    'assets/images/Image Banner 2.png',
   ];
 
   @override

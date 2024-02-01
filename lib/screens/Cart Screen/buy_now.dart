@@ -65,7 +65,7 @@ class _BuyButtonState extends State<BuyButton> {
         paymentIntentData = null;
       });
 
-      Get.snackbar("Success", "Paid Sucessfully");
+      //Get.snackbar("Success", "Paid Sucessfully");
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
@@ -114,8 +114,16 @@ class _BuyButtonState extends State<BuyButton> {
         ),
         height: 50,
         child: TextButton(
-          onPressed: () {
-            makePayment();
+          onPressed: () async {
+            try {
+              // Navigate to the new page where card details will be added
+              //await Get.to(CardDetailsPage()); // Create CardDetailsPage widget
+              // Continue with the payment logic if card details are successfully entered
+              makePayment();
+            } catch (error) {
+              // Handle cancellation or any other error
+              Get.snackbar("Error", error.toString());
+            }
           },
           child: widget.loading
               ? CircularProgressIndicator(

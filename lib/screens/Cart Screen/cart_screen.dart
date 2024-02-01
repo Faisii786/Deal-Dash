@@ -58,6 +58,8 @@ class _MyCartScreenState extends State<MyCartScreen> {
                     documents[index].data() as Map<String, dynamic>;
 
                 String imageUrl = data['image'];
+                String id = data['id'];
+                print(id);
 
                 return Padding(
                   padding:
@@ -104,7 +106,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                               try {
                                 await FirebaseFirestore.instance
                                     .collection("productsData")
-                                    .doc(userID)
+                                    .doc(snapshot.data!.docs[index]['image'])
                                     .delete();
 
                                 setState(() {});

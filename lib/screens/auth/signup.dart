@@ -32,9 +32,11 @@ class _SignUpPageState extends State<SignUpPage> {
   GlobalKey<FormState> MyKey = GlobalKey();
 
   // for mail
-  TextEditingController emailcontroller = TextEditingController();
   TextEditingController firstnamecontroller = TextEditingController();
   TextEditingController lastnamecontroller = TextEditingController();
+  TextEditingController phonecontroller = TextEditingController();
+  TextEditingController countrycontroller = TextEditingController();
+  TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   bool loading = false;
 
@@ -44,17 +46,20 @@ class _SignUpPageState extends State<SignUpPage> {
     } else if (lastnamecontroller.text.isEmpty) {
       showSnakBar("Last name is empty");
     } else if (emailcontroller.text.isEmpty) {
+    } else if (phonecontroller.text.isEmpty) {
+      showSnakBar("Phone number is empty");
+    } else if (emailcontroller.text.isEmpty) {
+    } else if (countrycontroller.text.isEmpty) {
+      showSnakBar("Country name is empty");
+    } else if (emailcontroller.text.isEmpty) {
       showSnakBar("Email is Empty");
       return;
-    }
-    // else if (phonecontroller.text.isEmpty) {
-    //   showSnakBar("Phone is Empty");
-    // }
-    else if (!isValidEmail(emailcontroller.text)) {
+    } else if (!isValidEmail(emailcontroller.text)) {
       showSnakBar("Please Enter a valid email");
     } else if (passwordcontroller.text.isEmpty) {
       showSnakBar("Password is Empty");
       return;
+    } else if (passwordcontroller.text.length < 8) {
     } else if (passwordcontroller.text.length < 8) {
       showSnakBar("Password must at least 8");
       return;
@@ -114,20 +119,22 @@ class _SignUpPageState extends State<SignUpPage> {
         "image": imageURL,
         "FirstName": firstnamecontroller.text,
         "LastName": lastnamecontroller.text,
-        //"phone": phonecontroller.text,
+        "phone": phonecontroller.text,
+        "country": countrycontroller.text,
         "email": emailcontroller.text,
         "password": passwordcontroller.text,
       });
-
-      Get.off(() => MyBottomNavbar());
-      firstnamecontroller.clear();
-      lastnamecontroller.clear();
-      //phonecontroller.clear();
-      emailcontroller.clear();
-      passwordcontroller.clear();
+      Get.to(() => MyBottomNavbar(),
+          transition: Transition.size, duration: Duration(seconds: 3));
       setState(() {
         loading = false;
       });
+      firstnamecontroller.clear();
+      lastnamecontroller.clear();
+      phonecontroller.clear();
+      countrycontroller.clear();
+      emailcontroller.clear();
+      passwordcontroller.clear();
     } catch (e) {
       print("Error creating account: $e");
       showSnakBar("Failed to create account: $e");
@@ -183,14 +190,14 @@ class _SignUpPageState extends State<SignUpPage> {
               AppColors().backgroundColor1,
             ]),
           ),
-          height: Get.height * 1,
-          width: Get.width * 1,
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   Align(
                     alignment: Alignment.topRight,
                     child: Text(
@@ -252,16 +259,32 @@ class _SignUpPageState extends State<SignUpPage> {
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: MyTextField(
                             controller: firstnamecontroller,
-                            hintText: 'Enter Firts Name',
-                            labelText: 'Firts Name',
+                            hintText: 'Enter first name',
+                            labelText: 'First Name',
                             icon: Icons.person),
                       ),
                       Container(
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: MyTextField(
                             controller: lastnamecontroller,
-                            hintText: 'Enter Last Name',
+                            hintText: 'Enter last Name',
                             labelText: 'Last Name',
+                            icon: Icons.person),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: MyTextField(
+                            controller: phonecontroller,
+                            hintText: '+92 3** *******',
+                            labelText: 'Phone number',
+                            icon: Icons.person),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        child: MyTextField(
+                            controller: countrycontroller,
+                            hintText: 'Enter your country',
+                            labelText: 'Country',
                             icon: Icons.person),
                       ),
                       // Container(
@@ -277,8 +300,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         margin: const EdgeInsets.symmetric(vertical: 10),
                         child: MyTextField(
                             controller: emailcontroller,
-                            hintText: 'Enter Email',
-                            labelText: 'Email Adress',
+                            hintText: 'Enter email',
+                            labelText: 'Email',
                             icon: Icons.person),
                       ),
                       Container(

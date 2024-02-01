@@ -29,7 +29,7 @@ class _MyTextFieldState extends State<MyTextField> {
     return TextFormField(
       controller: widget.controller,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 4),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 4),
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
