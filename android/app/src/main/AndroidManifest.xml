@@ -3,6 +3,12 @@
         android:label="Deal Dash"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
+        <!-- Add the Stripe publishable key as metadata -->
+        <meta-data
+            android:name="com.stripe.publishable_key"
+            android:value="pk_test_51OesWGKrSc6pdQwiJvQrVhMjuIFg2KOOP0sMvTH8huUNNW5oPrNjXMzQebbV2d0fZU7snqpzqaRxYxIsSltJGmRC00oDJN7Gaw" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -29,5 +35,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            
     </application>
 </manifest>

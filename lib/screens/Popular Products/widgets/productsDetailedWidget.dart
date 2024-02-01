@@ -192,7 +192,7 @@ class _ProductsDetailScreenWidgetState
                               SizedBox(
                                 width: 5,
                               ),
-                              BuyButton(text: 'Buy Now', onPressed: () {})
+                              BuyButton(text: 'Buy Now')
                             ],
                           )
                         ],
