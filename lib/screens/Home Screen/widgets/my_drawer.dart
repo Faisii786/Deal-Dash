@@ -3,6 +3,7 @@ import 'package:e_commerce_app/screens/Cart%20Screen/cart_screen.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/my_account.dart';
 import 'package:e_commerce_app/utility/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,9 +35,9 @@ class MyDrawer extends StatelessWidget {
             return const Text('Error');
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(
-                child: CircularProgressIndicator(
+                child: CupertinoActivityIndicator(
               color: Colors.white,
-              strokeWidth: 3,
+              animating: true,
             ));
           } else {
             final userData = snapshot.data;

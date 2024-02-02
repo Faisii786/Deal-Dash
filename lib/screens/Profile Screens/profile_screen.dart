@@ -3,6 +3,7 @@ import 'package:e_commerce_app/screens/auth/login_page.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/my_account.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/profile_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +47,20 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 builder: (context, snapshot) {
                   try {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return CircleAvatar(
+                        radius: 80,
+                        child: Center(
+                          child: CupertinoActivityIndicator(
+                            color: Colors.black,
+                            animating: true,
+                          ),
+                        ),
+                      );
+                    } else if (!snapshot.hasData && snapshot.data == null) {
+                      return CupertinoActivityIndicator(
+                        color: Colors.white,
+                        animating: true,
+                      );
                     } else if (snapshot.connectionState ==
                         ConnectionState.active) {
                       if (snapshot.hasData && snapshot.data != null) {
@@ -57,16 +71,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           radius: 80,
                           backgroundImage: NetworkImage(userData['image']),
                         );
-                      } else {
-                        return Text('No data to Display');
                       }
-                    } else {
-                      return Center(child: CircularProgressIndicator());
                     }
                   } catch (exc) {
                     print('exception is: $exc');
                     return Text('An error occurred.');
                   }
+                  return Text("data");
                 },
               ),
               SizedBox(height: 30),

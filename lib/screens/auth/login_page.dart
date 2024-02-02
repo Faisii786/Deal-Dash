@@ -104,8 +104,7 @@ class _LoginPageState extends State<LoginPage> {
           height: Get.height * 1,
           width: Get.width * 1,
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 20),
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 20),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
@@ -145,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                               AlwaysStoppedAnimation<Color>(Colors.amber),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
                       Text(
@@ -167,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
+                        margin: EdgeInsets.symmetric(vertical: 10),
                         child: MyTextField(
                             controller: passwordController,
                             hintText: 'Enter password',
