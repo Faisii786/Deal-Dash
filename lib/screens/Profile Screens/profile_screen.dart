@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/screens/auth/login_page.dart';
+//import 'package:e_commerce_app/screens/auth/login_page.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/my_account.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/profile_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -137,7 +137,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.off(() => LoginPage());
+                              //Get.off(() => LoginPage());
                             },
                             child: Text(
                               "Yes",

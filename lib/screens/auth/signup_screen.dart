@@ -2,31 +2,32 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/State%20Managment/image_picker.dart';
-import 'package:e_commerce_app/screens/auth/login_page.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/screens/auth/login_screen.dart';
+import 'package:e_commerce_app/screens/auth/theme/theme.dart';
 import 'package:e_commerce_app/screens/auth/widgets/button.dart';
-import 'package:e_commerce_app/screens/auth/widgets/text_field.dart';
+import 'package:e_commerce_app/screens/auth/widgets/custom_scaffold.dart';
+import 'package:e_commerce_app/screens/auth/widgets/text_filed.dart';
+import 'package:e_commerce_app/utility/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignupScreenState extends State<SignupScreen> {
   // for phone
   // TextEditingController phonecontroller = TextEditingController();
-  final SnakBarKey = GlobalKey<ScaffoldMessengerState>();
   // bool isHovered = false;
   // String countryvalue = '';
-  //
+
 
   bool isChecked = false;
   GlobalKey<FormState> MyKey = GlobalKey();
@@ -40,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController passwordcontroller = TextEditingController();
   bool loading = false;
 
-  void ValidateFunction() {
+  void SignupFunction() {
     if (firstnamecontroller.text.isEmpty) {
       showSnakBar("First name is empty");
     } else if (lastnamecontroller.text.isEmpty) {
@@ -178,183 +179,191 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   imagePickerController _controller = Get.put(imagePickerController());
+
+  final SnakBarKey = GlobalKey<ScaffoldMessengerState>();
   @override
   Widget build(BuildContext context) {
     return ScaffoldMessenger(
       key: SnakBarKey,
-      child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              AppColors().backgroundColor,
-              AppColors().backgroundColor1,
-            ]),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
+      child: CustomScaffold(
+        child: Column(
+          children: [
+            const Expanded(
+              flex: 0,
+              child: SizedBox(
+                height: 9,
+              ),
+            ),
+            Expanded(
+              flex: 8,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40.0),
+                    topRight: Radius.circular(40.0),
                   ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Text(
-                      "Deal Dash",
-                      style: GoogleFonts.sansita(
-                          color: AppColors().whiteColor, fontSize: 18),
-                    ),
-                  ),
-                  Obx(() {
-                    return Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            _controller.imagePick();
-                          },
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: _controller.imgPath.isNotEmpty
-                                ? FileImage(
-                                    File(_controller.imgPath.toString()))
-                                : null,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment:
-                        CrossAxisAlignment.start, // Start content
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        width: 30,
-                        height: 2,
-                        child: LinearProgressIndicator(
-                          value: 3,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.amber),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Text(
-                        "Signup",
-                        style: GoogleFonts.montserrat(
-                            color: AppColors().whiteColor, fontSize: 30),
+                        "Let's Sign up",
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w900,
+                            color: lightColorScheme.primary,
+                            fontFamily: 'Muli1'),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 20.0,
                       ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: MyTextField(
-                            controller: firstnamecontroller,
-                            hintText: 'Enter first name',
-                            labelText: 'First Name',
-                            icon: Icons.person),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: MyTextField(
-                            controller: lastnamecontroller,
-                            hintText: 'Enter last Name',
-                            labelText: 'Last Name',
-                            icon: Icons.person),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: MyTextField(
-                            controller: phonecontroller,
-                            hintText: '+92 3** *******',
-                            labelText: 'Phone number',
-                            icon: Icons.person),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: MyTextField(
-                            controller: countrycontroller,
-                            hintText: 'Enter your country',
-                            labelText: 'Country',
-                            icon: Icons.person),
-                      ),
-                      // Container(
-                      //   margin: const EdgeInsets.symmetric(vertical: 10),
-                      //   child: MyTextField(
-                      //       controller: phonecontroller,
-                      //       hintText: '+92 must with country code ',
-                      //       labelText: 'Enter phone',
-                      //       icon: Icons.person),
-                      // ),
-
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: MyTextField(
-                            controller: emailcontroller,
-                            hintText: 'Enter email',
-                            labelText: 'Email',
-                            icon: Icons.person),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: MyTextField(
-                            controller: passwordcontroller,
-                            hintText: 'Enter password',
-                            labelText: 'Password',
-                            icon: Icons.password),
+                      MyTextField(
+                        controller: firstnamecontroller,
+                        name: 'First name',
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 10.0,
+                      ),
+                      MyTextField(
+                        controller: lastnamecontroller,
+                        name: 'Last name',
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      MyTextField(
+                        controller: countrycontroller,
+                        name: 'Country',
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      MyTextField(
+                        controller: phonecontroller,
+                        name: 'Phone',
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      MyTextField(
+                        controller: emailcontroller,
+                        name: 'Email',
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      MyTextField(
+                        controller: passwordcontroller,
+                        name: 'Password',
+                      ),
+                      const SizedBox(
+                        height: 30.0,
                       ),
                       MyButton(
-                          loading: loading,
                           text: 'Register',
                           onPressed: () {
-                            ValidateFunction();
+                            SignupFunction();
                           }),
                       const SizedBox(
-                        height: 30,
+                        height: 30.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Expanded(
+                            child: Divider(
+                              thickness: 0.7,
+                              color: Color.fromARGB(255, 105, 105, 105)
+                                  .withOpacity(0.5),
+                            ),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 0,
+                              horizontal: 10,
+                            ),
+                            child: Text(
+                              'Sign up with',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 49, 49, 49),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Divider(
+                              thickness: 0.7,
+                              color: Color.fromARGB(255, 105, 105, 105)
+                                  .withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 30.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.facebook,
+                          ),
+                          Icon(
+                            Icons.facebook,
+                          ),
+                          Icon(
+                            Icons.facebook,
+                          ),
+                          Icon(
+                            Icons.facebook,
+                          ),
+                          // Logo(Logos.facebook_f),
+                          // Logo(Logos.twitter),
+                          // Logo(Logos.google),
+                          // Logo(Logos.apple),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      // already have an account
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
                           Text(
-                            "Already Registered ? ",
+                            "Didn't have an account ? ",
                             style: GoogleFonts.roboto(
-                                color: AppColors().whiteColor, fontSize: 15),
+                                color: AppColors().blackColor, fontSize: 15),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => const LoginPage());
+                              Get.to(() => const LoginScreen(),transition: Transition.downToUp , duration: Duration(seconds: 2));
                             },
                             child: Text(
                               "Login",
                               style: GoogleFonts.montserrat(
-                                  color: Colors.amber,
+                                  color: const Color.fromARGB(255, 73, 7, 255),
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold),
                             ),
                           )
                         ],
                       ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );

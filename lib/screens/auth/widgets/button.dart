@@ -21,8 +21,8 @@ class MyButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors().whiteColor,
-          borderRadius: BorderRadius.circular(50),
+          color: AppColors().backgroundColor2,
+          borderRadius: BorderRadius.circular(10),
         ),
         width: double.infinity,
         height: 50,
@@ -32,7 +32,7 @@ class MyButton extends StatelessWidget {
                 child: Text(
                   text,
                   style: GoogleFonts.lato(
-                    color: AppColors().blackColor,
+                    color: AppColors().whiteColor,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
