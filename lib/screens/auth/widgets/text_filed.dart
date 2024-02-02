@@ -28,7 +28,7 @@ class MyTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,
         ),
-        labelText: name ?? "",
+        labelText: name,
         labelStyle: TextStyle(color: AppColors().blackColor),
       ),
       style: TextStyle(color: AppColors().blackColor, fontSize: 17),
