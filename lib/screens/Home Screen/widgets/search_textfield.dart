@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
 
 class SearchTextField extends StatefulWidget {
   const SearchTextField({

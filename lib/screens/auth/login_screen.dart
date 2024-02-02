@@ -5,7 +5,7 @@ import 'package:e_commerce_app/screens/auth/theme/theme.dart';
 import 'package:e_commerce_app/screens/auth/widgets/button.dart';
 import 'package:e_commerce_app/screens/auth/widgets/custom_scaffold.dart';
 import 'package:e_commerce_app/screens/auth/widgets/text_filed.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -208,6 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 30.0,
                       ),
                       MyButton(
+                        loading: loading,
                           text: 'Sign in',
                           onPressed: () {
                             ValidateFunction();

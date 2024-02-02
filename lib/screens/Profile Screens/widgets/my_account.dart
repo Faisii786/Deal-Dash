@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/account_containers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -60,12 +60,23 @@ class _MyAccountState extends State<MyAccount> {
                             SizedBox(
                               height: 10,
                             ),
-                            Center(
-                              child: CircleAvatar(
-                                radius: 60,
-                                backgroundImage:
-                                    NetworkImage(UserData['image']),
-                              ),
+                            Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                CircleAvatar(
+                                  radius: 70,
+                                  backgroundImage:
+                                      NetworkImage(UserData['image']),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 15, right: 5),
+                                  child: Icon(
+                                    Icons.camera_alt_outlined,
+                                    color: AppColors().greykColor,
+                                  ),
+                                )
+                              ],
                             ),
                             SizedBox(
                               height: 30,
@@ -82,7 +93,7 @@ class _MyAccountState extends State<MyAccount> {
                             SizedBox(
                               height: 20,
                             ),
-                            
+
                             account_containers(
                                 icon: Icons.call_outlined,
                                 name: UserData['phone']),

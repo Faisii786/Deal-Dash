@@ -8,7 +8,7 @@ import 'package:e_commerce_app/screens/auth/theme/theme.dart';
 import 'package:e_commerce_app/screens/auth/widgets/button.dart';
 import 'package:e_commerce_app/screens/auth/widgets/custom_scaffold.dart';
 import 'package:e_commerce_app/screens/auth/widgets/text_filed.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,6 @@ class _SignupScreenState extends State<SignupScreen> {
   // TextEditingController phonecontroller = TextEditingController();
   // bool isHovered = false;
   // String countryvalue = '';
-
 
   bool isChecked = false;
   GlobalKey<FormState> MyKey = GlobalKey();
@@ -221,6 +220,43 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SizedBox(
                         height: 20.0,
                       ),
+                      Obx(() {
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _controller.imagePick();
+                              },
+                              child: Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 70,
+                                    backgroundImage: _controller
+                                            .imgPath.isNotEmpty
+                                        ? FileImage(File(
+                                            _controller.imgPath.toString()))
+                                        : AssetImage(
+                                                "assets/images/dprofile.png")
+                                            as ImageProvider,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        bottom: 15, right: 5),
+                                    child: Icon(
+                                      Icons.camera_alt_outlined,
+                                      color: AppColors().greykColor,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       MyTextField(
                         controller: firstnamecontroller,
                         name: 'First name',
@@ -343,7 +379,9 @@ class _SignupScreenState extends State<SignupScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => const LoginScreen(),transition: Transition.downToUp , duration: Duration(seconds: 2));
+                              Get.to(() => const LoginScreen(),
+                                  transition: Transition.downToUp,
+                                  duration: Duration(seconds: 2));
                             },
                             child: Text(
                               "Login",

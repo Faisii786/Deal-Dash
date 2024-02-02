@@ -2,7 +2,7 @@ import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/cart_screen.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/home_screen.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/profile_screen.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stylish_bottom_bar/model/bar_items.dart';

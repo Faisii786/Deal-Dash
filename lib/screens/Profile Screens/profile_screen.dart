@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:e_commerce_app/screens/auth/login_page.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/my_account.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/profile_container.dart';
+import 'package:e_commerce_app/screens/auth/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,10 +66,22 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       if (snapshot.hasData && snapshot.data != null) {
                         var userData = snapshot.data!.docs.first.data()
                             as Map<String, dynamic>;
-
-                        return CircleAvatar(
-                          radius: 80,
-                          backgroundImage: NetworkImage(userData['image']),
+                        return Stack(
+                          alignment: Alignment.bottomRight,
+                          children: [
+                            CircleAvatar(
+                              radius: 70,
+                              backgroundImage: NetworkImage(userData['image']),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(bottom: 15, right: 5),
+                              child: Icon(
+                                Icons.camera_alt_outlined,
+                                color: Colors.grey,
+                              ),
+                            )
+                          ],
                         );
                       }
                     }
@@ -137,7 +149,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              //Get.off(() => LoginPage());
+                              Get.to(() => LoginScreen());
                             },
                             child: Text(
                               "Yes",

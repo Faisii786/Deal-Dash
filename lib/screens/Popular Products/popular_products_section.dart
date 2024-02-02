@@ -20,44 +20,39 @@ class PopuarProductsSection extends StatelessWidget {
             img: "assets/images/mouse/mouse1.png",
             onTap: () {
               Get.to(() => ProductsDetailScreenWidget(
-                    controller: controller,
-                    img: 'assets/images/mouse/mouse1.png',
-                    rating: '5.0',
-                    name: 'Wireless Controller for PS4',
-                    price: '\$64.99',
-                  ));
+                  'hello', 'assets/images/mouse/mouse1.png', '21'));
             },
           ),
-          SizedBox(
-            width: 5,
-          ),
-          PopularProducts(
-            img: "assets/images/pant.png",
-            onTap: () {
-              Get.to(() => ProductsDetailScreenWidget(
-                    controller: controller,
-                    img: 'assets/images/pant.png',
-                    rating: '3.0',
-                    name: 'Trouser',
-                    price: '\$90.00',
-                  ));
-            },
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          PopularProducts(
-            img: "assets/images/glap.png",
-            onTap: () {
-              Get.to(() => ProductsDetailScreenWidget(
-                    controller: controller,
-                    img: 'assets/images/glap.png',
-                    rating: '4.3',
-                    name: 'Branded Glap',
-                    price: '\$50.65',
-                  ));
-            },
-          ),
+          // SizedBox(
+          //   width: 5,
+          // ),
+          // PopularProducts(
+          //   img: "assets/images/pant.png",
+          //   onTap: () {
+          //     Get.to(() => ProductsDetailScreenWidget(
+          //           controller: controller,
+          //           img: 'assets/images/pant.png',
+          //           rating: '3.0',
+          //           name: 'Trouser',
+          //           price: '\$90.00',
+          //         ));
+          //   },
+          // ),
+          // SizedBox(
+          //   width: 5,
+          // ),
+          // PopularProducts(
+          //   img: "assets/images/glap.png",
+          //   onTap: () {
+          //     Get.to(() => ProductsDetailScreenWidget(
+          //           controller: controller,
+          //           img: 'assets/images/glap.png',
+          //           rating: '4.3',
+          //           name: 'Branded Glap',
+          //           price: '\$50.65',
+          //         ));
+          //   },
+          // ),
           SizedBox(
             width: 5,
           ),

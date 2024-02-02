@@ -2,7 +2,9 @@ import 'package:e_commerce_app/screens/Splash%20Screen/Splash_button2.dart';
 import 'package:e_commerce_app/screens/Splash%20Screen/splash_button1.dart';
 //import 'package:e_commerce_app/screens/auth/login_page.dart';
 //import 'package:e_commerce_app/screens/auth/signup.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/screens/auth/login_screen.dart';
+import 'package:e_commerce_app/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -72,7 +74,7 @@ class _SplashScreenState extends State<SplashScreen> {
               SplashButton1(
                   text: "Get Start",
                   onPressed: () {
-                    //Get.to(() => LoginPage());
+                    Get.to(() => LoginScreen());
                   }),
               SizedBox(
                 height: 10,
@@ -80,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
               SplashButton2(
                   text: "Create Account",
                   onPressed: () {
-                    //Get.to(() => SignUpPage());
+                    Get.to(() => SignupScreen());
                   }),
               SizedBox(
                 height: 40,

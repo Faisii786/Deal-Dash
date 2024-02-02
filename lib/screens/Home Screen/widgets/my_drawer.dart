@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/cart_screen.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/my_account.dart';
-import 'package:e_commerce_app/utility/colors.dart';
+import 'package:e_commerce_app/res/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -44,11 +44,11 @@ class MyDrawer extends StatelessWidget {
             return Column(
               children: [
                 UserAccountsDrawerHeader(
-                  // currentAccountPicture: CircleAvatar(
-                  //   backgroundImage: NetworkImage(userData?["image"]),
-                  // ),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: NetworkImage(userData?["image"]),
+                  ),
                   accountName: Text(
-                    'Hello ' + userData?['FirstName'],
+                    'Welcome ' + userData?['FirstName'],
                     style: const TextStyle(
                         color: Colors.white, fontSize: 20, fontFamily: "Muli6"),
                   ),
