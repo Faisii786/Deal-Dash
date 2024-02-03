@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
+//import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
 import 'package:e_commerce_app/screens/Popular%20Products/widgets/popular_products_container.dart';
 import 'package:e_commerce_app/screens/Popular%20Products/widgets/productsDetailedWidget.dart';
 import 'package:flutter/material.dart';
@@ -11,21 +11,29 @@ class PopuarProductsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final toggleFav controller = Get.put(toggleFav());
+    //final toggleFav controller = Get.put(toggleFav());
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           PopularProducts(
-            img: "assets/images/mouse/mouse1.png",
+            img: "assets/images/mouse/mouse.png",
             onTap: () {
               Get.to(() => ProductsDetailScreenWidget(
-                  'hello', 'assets/images/mouse/mouse1.png', '21'));
+                  '3200 dpi Mouse', 'assets/images/mouse/cmouse.png', '1500'));
             },
           ),
-          // SizedBox(
-          //   width: 5,
-          // ),
+          SizedBox(
+            width: 10,
+          ),
+          PopularProducts(
+            img: "assets/images/mouse/headset.jpg",
+            onTap: () {
+              Get.to(() => ProductsDetailScreenWidget(
+                  'hello', 'assets/images/mouse/mouse1.png', '1500'));
+            },
+          ),
+
           // PopularProducts(
           //   img: "assets/images/pant.png",
           //   onTap: () {

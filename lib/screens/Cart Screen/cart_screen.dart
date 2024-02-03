@@ -77,7 +77,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                               child: Image.asset(
                                 imageUrl,
                                 width: Get.width * 0.3,
-                                //height: Get.height * 0.15,
+                                height: Get.height * 0.15,
                               ),
                             ),
                           )),
@@ -88,18 +88,13 @@ class _MyCartScreenState extends State<MyCartScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            data['name'],
+                            data['title'],
                             style: TextStyle(
                               fontSize:
                                   MediaQuery.of(context).size.width * 0.04,
                             ),
                           ),
-                          Text(
-                            data['price'],
-                            style: TextStyle(
-                                color: Colors.red, fontWeight: FontWeight.bold),
-                          ),
-                          Text(data['rating']),
+                          Text(data['price']),
                           GestureDetector(
                             onTap: () async {
                               print(userID);

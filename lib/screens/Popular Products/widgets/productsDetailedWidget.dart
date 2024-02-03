@@ -1,16 +1,67 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/screens/Cart%20Screen/addToCartButton.dart';
+import 'package:e_commerce_app/screens/Cart%20Screen/buy_now.dart';
+import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
+import 'package:e_commerce_app/utils/utills.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductsDetailScreenWidget extends StatelessWidget {
-  String title;
-  String price;
-  String image;
+class ProductsDetailScreenWidget extends StatefulWidget {
+  final String title;
+  final String price;
+  final String image;
 
   ProductsDetailScreenWidget(this.title, this.image, this.price);
+
+  @override
+  State<ProductsDetailScreenWidget> createState() =>
+      _ProductsDetailScreenWidgetState();
+}
+
+class _ProductsDetailScreenWidgetState
+    extends State<ProductsDetailScreenWidget> {
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future addToCart() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+
+      final userID = FirebaseAuth.instance.currentUser!.uid;
+      final cartCollection = _firestore.collection("productsData");
+
+      await cartCollection.add({
+        'id': userID,
+        'title': widget.title,
+        'price': widget.price,
+        'image': widget.image,
+      });
+      utills.snackbarTop("Success", "Data is successfully added to cart");
+      setState(() {
+        loading = true;
+      });
+      Get.to(() => MyBottomNavbar());
+    } on FirebaseException catch (err) {
+      utills.snackbarTop("Error", err.toString());
+      setState(() {
+        loading = false;
+      });
+    } catch (e) {
+      utills.snackbarTop("Error", e.toString());
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
+  bool loading = false;
+
   Color myColor = Color(0xFF95353D);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,43 +87,35 @@ class ProductsDetailScreenWidget extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    title,
+                    widget.title,
                     style: TextStyle(
-                        fontSize: 38,
+                        fontSize: 30,
                         color: Colors.white,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "Code Here",
-                    style: TextStyle(fontSize: 17, color: Colors.white),
+                    "Upto 3200DPI Control",
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ],
               ),
             ),
           ),
           // //Price-Container
-          Positioned(
-            top: 100,
-            child: Container(
-              width: Get.width * 0.2,
-              height: Get.height * 0.5,
-              color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Price",
-                        style: TextStyle(fontSize: 15, color: Colors.white)),
-                    Text(price,
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white)),
-                  ],
-                ),
-              ),
+          Container(
+            color: Colors.transparent,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Price",
+                    style: TextStyle(fontSize: 15, color: Colors.white)),
+                Text(widget.price,
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white)),
+              ],
             ),
           ),
           //Second Main Container
@@ -98,7 +141,7 @@ class ProductsDetailScreenWidget extends StatelessWidget {
                         height: 100,
                       ),
                       Text(
-                          "Lorem ipsum dolor ss vitae justo vulp, elit libero posuere libero, vel ultricies nunc augue vel lacus. Ut ullamcorper risus quis purus cursus, vel pulvinar odio condimentum. Maecenas vel tristique libero."),
+                          "3200 dpi Mechanical Gaming Mouse RGB with 7 Programmable Buttons - 7 LED Light Wired USB Optical Mouse with Side Buttons & Mouse Pad for PC, Laptop, Computer, Gaming, Pubg Mobile - Black, White & Pink - FunBug"),
                     ],
                   ),
                 ),
@@ -106,76 +149,85 @@ class ProductsDetailScreenWidget extends StatelessWidget {
             ),
           ),
           //image Container
-          Positioned(
-            top: 130,
-            left: 95,
+          Align(
+            alignment: Alignment.centerRight,
             child: Container(
-              width: Get.width * 0.7,
-              height: Get.height * 0.4,
-              color: Colors.transparent,
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
+              height: Get.height * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 100, right: 20),
+                child: Image.asset(
+                  widget.image,
+                ),
               ),
             ),
           ),
           //Buttons Row
-          Positioned(
-            top: 570,
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
+          Column(
+            children: [
+              Spacer(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Row(
                   children: [
-                    Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Colors.blue,
-                          ),
-                        ),
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              CupertinoIcons.cart_fill,
-                              color: Colors.blue,
-                            ))),
+                    AddToCartButton(
+                        loading: loading,
+                        onPressed: () async {
+                          await addToCart();
+                        }),
                     SizedBox(
                       width: 10,
                     ),
-                    Container(
-                      width: Get.width * 0.79,
-                      height: Get.height * 0.06,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          'BUY NOW',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
-                        ),
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color?>(Colors.blue),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: BorderSide(color: Colors.blue, width: 1.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //     decoration: BoxDecoration(
+                    //       borderRadius: BorderRadius.circular(10),
+                    //       border: Border.all(
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //     child: IconButton(
+                    //         onPressed: () {},
+                    //         icon: Icon(
+                    //           Icons.shopping_cart_outlined,
+                    //           color: Colors.black,
+                    //         ))),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    BuyButton(text: 'Buy Now'),
+                    // Container(
+                    //   width: Get.width * 0.79,
+                    //   height: Get.height * 0.06,
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.transparent,
+                    //     borderRadius: BorderRadius.circular(10),
+                    //   ),
+                    //   child: ElevatedButton(
+                    //     onPressed: () {},
+                    //     child: Text(
+                    //       'BUY NOW',
+                    //       style: TextStyle(
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 20,
+                    //           color: Colors.white),
+                    //     ),
+                    //     style: ButtonStyle(
+                    //       backgroundColor:
+                    //           MaterialStateProperty.all<Color?>(Colors.blue),
+                    //       shape:
+                    //           MaterialStateProperty.all<RoundedRectangleBorder>(
+                    //         RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(10),
+                    //           side: BorderSide(color: Colors.blue, width: 1.0),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),
@@ -219,44 +271,44 @@ class ProductsDetailScreenWidget extends StatelessWidget {
 
 // class _ProductsDetailScreenWidgetState
 //     extends State<ProductsDetailScreenWidget> {
-//   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-//   Future addToCart() async {
-//     try {
-//       setState(() {
-//         loading = true;
-//       });
+  // Future addToCart() async {
+  //   try {
+  //     setState(() {
+  //       loading = true;
+  //     });
 
-//       final userID = FirebaseAuth.instance.currentUser!.uid;
-//       final cartCollection = _firestore.collection("productsData");
+  //     final userID = FirebaseAuth.instance.currentUser!.uid;
+  //     final cartCollection = _firestore.collection("productsData");
 
-//       await cartCollection.add({
-//         'id': userID,
-//         'image': widget.img,
-//         'rating': widget.rating,
-//         'name': widget.name,
-//         'price': widget.price,
-//       });
+  //     await cartCollection.add({
+  //       'id': userID,
+  //       'image': widget.img,
+  //       'rating': widget.rating,
+  //       'name': widget.name,
+  //       'price': widget.price,
+  //     });
 
-//       utills.snackbarTop("Success", "Data is successfully added");
-//       setState(() {
-//         loading = true;
-//       });
-//       Get.to(() => MyBottomNavbar());
-//     } on FirebaseException catch (err) {
-//       utills.snackbarTop("Error", err.toString());
-//       setState(() {
-//         loading = false;
-//       });
-//     } catch (e) {
-//       utills.snackbarTop("Error", e.toString());
-//       setState(() {
-//         loading = false;
-//       });
-//     }
-//   }
+  //     utills.snackbarTop("Success", "Data is successfully added");
+  //     setState(() {
+  //       loading = true;
+  //     });
+  //     Get.to(() => MyBottomNavbar());
+  //   } on FirebaseException catch (err) {
+  //     utills.snackbarTop("Error", err.toString());
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //   } catch (e) {
+  //     utills.snackbarTop("Error", e.toString());
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //   }
+  // }
 
-//   bool loading = false;
+  // bool loading = false;
 
 //   @override
 //   Widget build(BuildContext context) {

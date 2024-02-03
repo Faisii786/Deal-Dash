@@ -15,14 +15,9 @@ class PopularProducts extends StatelessWidget {
         height: 180,
         width: Get.width * 0.5,
         decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage(img)),
           borderRadius: BorderRadius.circular(10),
           color: AppColors().SearchTextFieldbkgrnClr,
-        ),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Image.asset(img),
-          ),
         ),
       ),
     );

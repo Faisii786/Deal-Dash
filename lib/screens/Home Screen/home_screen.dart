@@ -70,7 +70,7 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  SpecialForYouSection(),
+                  PopuarProductsSection(),
                   SizedBox(
                     height: 10,
                   ),
@@ -78,7 +78,7 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  PopuarProductsSection(),
+                  SpecialForYouSection(),
                   SizedBox(
                     height: 30,
                   ),

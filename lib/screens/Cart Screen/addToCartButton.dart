@@ -1,17 +1,16 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:e_commerce_app/res/colors.dart';
 
 class AddToCartButton extends StatelessWidget {
-  
   final VoidCallback onPressed;
   bool loading;
 
   AddToCartButton({
     super.key,
-    
     required this.onPressed,
     this.loading = false,
   });
@@ -29,23 +28,14 @@ class AddToCartButton extends StatelessWidget {
       child: TextButton(
           onPressed: onPressed,
           child: loading
-              ? CircularProgressIndicator(
-                  strokeWidth: 3,
+              ? CupertinoActivityIndicator(
                   color: Colors.white,
                 )
               : Icon(
                   Icons.shopping_cart_outlined,
                   color: AppColors().whiteColor,
                   size: 30,
-                )
-          // : Text(
-          //     text,
-          //     style: GoogleFonts.lato(
-          //       color: AppColors().whiteColor,
-          //       fontSize: 20,
-          //     ),
-          //   ),
-          ),
+                )),
     );
   }
 }
