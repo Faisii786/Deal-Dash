@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/State%20Managment/image_picker.dart';
+import 'package:e_commerce_app/responsive/screen_size.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
 import 'package:e_commerce_app/screens/auth/login_screen.dart';
 import 'package:e_commerce_app/screens/auth/theme/theme.dart';
@@ -206,197 +207,206 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Let's Sign up",
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w900,
-                            color: lightColorScheme.primary,
-                            fontFamily: 'Muli1'),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Obx(() {
-                        return Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                _controller.imagePick();
-                              },
-                              child: Stack(
-                                alignment: Alignment.bottomRight,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 70,
-                                    backgroundImage: _controller
-                                            .imgPath.isNotEmpty
-                                        ? FileImage(File(
-                                            _controller.imgPath.toString()))
-                                        : AssetImage(
-                                                "assets/images/dprofile.png")
-                                            as ImageProvider,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 15, right: 5),
-                                    child: Icon(
-                                      Icons.camera_alt_outlined,
-                                      color: AppColors().greykColor,
+                  child: Padding(
+                    padding:
+                        MediaQuery.of(context).size.width > mobileScreenWidth
+                            ? EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.28)
+                            : EdgeInsets.all(0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Let's Sign up",
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w900,
+                              color: lightColorScheme.primary,
+                              fontFamily: 'Muli1'),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Obx(() {
+                          return Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  _controller.imagePick();
+                                },
+                                child: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 70,
+                                      backgroundImage: _controller
+                                              .imgPath.isNotEmpty
+                                          ? FileImage(File(
+                                              _controller.imgPath.toString()))
+                                          : AssetImage(
+                                                  "assets/images/dprofile.png")
+                                              as ImageProvider,
                                     ),
-                                  )
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 15, right: 5),
+                                      child: Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: AppColors().greykColor,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        MyTextField(
+                          controller: firstnamecontroller,
+                          name: 'First name',
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        MyTextField(
+                          controller: lastnamecontroller,
+                          name: 'Last name',
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        MyTextField(
+                          controller: countrycontroller,
+                          name: 'Country',
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        MyTextField(
+                          controller: phonecontroller,
+                          name: 'Phone',
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        MyTextField(
+                          controller: emailcontroller,
+                          name: 'Email',
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        MyTextField(
+                          controller: passwordcontroller,
+                          name: 'Password',
+                        ),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        MyButton(
+                            text: 'Register',
+                            onPressed: () {
+                              SignupFunction();
+                            }),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.7,
+                                color: Color.fromARGB(255, 105, 105, 105)
+                                    .withOpacity(0.5),
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 0,
+                                horizontal: 10,
+                              ),
+                              child: Text(
+                                'Sign up with',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 49, 49, 49),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.7,
+                                color: Color.fromARGB(255, 105, 105, 105)
+                                    .withOpacity(0.5),
                               ),
                             ),
                           ],
-                        );
-                      }),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      MyTextField(
-                        controller: firstnamecontroller,
-                        name: 'First name',
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      MyTextField(
-                        controller: lastnamecontroller,
-                        name: 'Last name',
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      MyTextField(
-                        controller: countrycontroller,
-                        name: 'Country',
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      MyTextField(
-                        controller: phonecontroller,
-                        name: 'Phone',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      MyTextField(
-                        controller: emailcontroller,
-                        name: 'Email',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      MyTextField(
-                        controller: passwordcontroller,
-                        name: 'Password',
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      MyButton(
-                          text: 'Register',
-                          onPressed: () {
-                            SignupFunction();
-                          }),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Color.fromARGB(255, 105, 105, 105)
-                                  .withOpacity(0.5),
+                        ),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.facebook,
                             ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 0,
-                              horizontal: 10,
+                            Icon(
+                              Icons.facebook,
                             ),
-                            child: Text(
-                              'Sign up with',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 49, 49, 49),
+                            Icon(
+                              Icons.facebook,
+                            ),
+                            Icon(
+                              Icons.facebook,
+                            ),
+                            // Logo(Logos.facebook_f),
+                            // Logo(Logos.twitter),
+                            // Logo(Logos.google),
+                            // Logo(Logos.apple),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 25.0,
+                        ),
+                        // already have an account
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Didn't have an account ? ",
+                              style: GoogleFonts.roboto(
+                                  color: AppColors().blackColor, fontSize: 15),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => const LoginScreen(),
+                                    transition: Transition.downToUp,
+                                    duration: Duration(seconds: 2));
+                              },
+                              child: Text(
+                                "Login",
+                                style: GoogleFonts.montserrat(
+                                    color:
+                                        const Color.fromARGB(255, 73, 7, 255),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Color.fromARGB(255, 105, 105, 105)
-                                  .withOpacity(0.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          // Logo(Logos.facebook_f),
-                          // Logo(Logos.twitter),
-                          // Logo(Logos.google),
-                          // Logo(Logos.apple),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 25.0,
-                      ),
-                      // already have an account
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Didn't have an account ? ",
-                            style: GoogleFonts.roboto(
-                                color: AppColors().blackColor, fontSize: 15),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => const LoginScreen(),
-                                  transition: Transition.downToUp,
-                                  duration: Duration(seconds: 2));
-                            },
-                            child: Text(
-                              "Login",
-                              style: GoogleFonts.montserrat(
-                                  color: const Color.fromARGB(255, 73, 7, 255),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                    ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

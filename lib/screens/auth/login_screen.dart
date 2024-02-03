@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/responsive/screen_size.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
 import 'package:e_commerce_app/screens/auth/forget_passsword_screen.dart';
 import 'package:e_commerce_app/screens/auth/signup_screen.dart';
@@ -21,6 +22,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  TextEditingController resetemailController = TextEditingController();
 
   bool isChecked = false;
 
@@ -75,6 +78,49 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  // Forget password
+  void ForgetFunction() {
+    if (resetemailController.text.isEmpty) {
+      showSnakBar("Email is Empty");
+      return;
+    } else if (!isValidEmail(resetemailController.text)) {
+      showSnakBar("Please Enter a valid email");
+    } else {
+      Reset_Password();
+    }
+  }
+
+  Future Reset_Password() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+
+      if (FirebaseAuth.instance.currentUser!.email != null) {
+        await FirebaseAuth.instance
+            .sendPasswordResetEmail(email: resetemailController.text.toString())
+            .then((value) {
+          showSnakBar("We have Send to email ! Please Check Your email");
+          resetemailController.clear();
+          setState(() {
+            loading = false;
+          });
+        });
+      } else {
+        showSnakBar("No user found");
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
+        showSnakBar("Invalid Credentials ! Please enter valid email");
+      } else if (e.code == 'user-not-found') {
+        showSnakBar("Email does not foud");
+      }
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
   // Function to validate email using a regular expression
   bool isValidEmail(String email) {
     final emailRegExp = RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$');
@@ -117,195 +163,257 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Wellcome Back !",
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w900,
-                            color: lightColorScheme.primary,
-                            fontFamily: 'Muli1'),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      MyTextField(
-                        controller: emailController,
-                        name: 'Email',
-                      ),
-                      const SizedBox(
-                        height: 10.0,
-                      ),
-                      MyTextField(
-                        controller: passwordController,
-                        name: 'Password',
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  isChecked = !isChecked;
-                                });
-                              },
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 18.0,
-                                    height: 18.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      border: Border.all(
+                  child: Padding(
+                    padding:
+                        MediaQuery.of(context).size.width > mobileScreenWidth
+                            ? EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.28)
+                            : EdgeInsets.all(0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Wellcome Back !",
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w900,
+                              color: lightColorScheme.primary,
+                              fontFamily: 'Muli1'),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        MyTextField(
+                          controller: emailController,
+                          name: 'Email',
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        MyTextField(
+                          controller: passwordController,
+                          name: 'Password',
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    isChecked = !isChecked;
+                                  });
+                                },
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 18.0,
+                                      height: 18.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                        border: Border.all(
+                                          color: AppColors().blackColor,
+                                          width: 2.0,
+                                        ),
+                                      ),
+                                      child: isChecked
+                                          ? Icon(
+                                              Icons.check,
+                                              size: 12.0,
+                                              color: AppColors().blackColor,
+                                            )
+                                          : null,
+                                    ),
+                                    const SizedBox(width: 8.0),
+                                    Text(
+                                      "Remember",
+                                      style: TextStyle(
                                         color: AppColors().blackColor,
-                                        width: 2.0,
+                                        fontSize: 15,
                                       ),
                                     ),
-                                    child: isChecked
-                                        ? Icon(
-                                            Icons.check,
-                                            size: 12.0,
-                                            color: AppColors().blackColor,
-                                          )
-                                        : null,
+                                  ],
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.bottomSheet(
+                                      Container(
+                                        padding:
+                                            MediaQuery.of(context).size.width >
+                                                    mobileScreenWidth
+                                                ? EdgeInsets.symmetric(
+                                                    horizontal: 80,
+                                                    vertical: 16)
+                                                : EdgeInsets.all(16),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              "Reset your Password !",
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.w900,
+                                                  color:
+                                                      lightColorScheme.primary,
+                                                  fontFamily: 'Muli1'),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Please enter your email, and we'll send you an email to reset your password",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 16.0,
+                                                  fontFamily: 'Muli1'),
+                                            ),
+                                            SizedBox(height: 10),
+                                            MyTextField(
+                                                controller:
+                                                    resetemailController,
+                                                name: "Enter your email"),
+                                            SizedBox(height: 30),
+                                            MyButton(
+                                              loading: loading,
+                                                text: 'Reset Password',
+                                                onPressed: () {
+                                                  ForgetFunction();
+                                                }),
+                                          ],
+                                          // Changed your mind? Go back to the login screen.
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.white);
+
+                                  // Get.to(() => const ForgetPassoword(),
+                                  //     transition: Transition.fadeIn,
+                                  //     duration: Duration(seconds: 2));
+                                },
+                                child: Text(
+                                  "Forget Password?",
+                                  style: TextStyle(
+                                    color:
+                                        const Color.fromARGB(255, 179, 19, 7),
+                                    fontSize: 15,
                                   ),
-                                  const SizedBox(width: 8.0),
-                                  Text(
-                                    "Remember",
-                                    style: TextStyle(
-                                      color: AppColors().blackColor,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        MyButton(
+                            loading: loading,
+                            text: 'Sign in',
+                            onPressed: () {
+                              ValidateFunction();
+                            }),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.7,
+                                color: Color.fromARGB(255, 105, 105, 105)
+                                    .withOpacity(0.5),
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                Get.to(() => const ForgetPassoword(),
-                                    transition: Transition.fadeIn,
-                                    duration: Duration(seconds: 2));
-                              },
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 0,
+                                horizontal: 10,
+                              ),
                               child: Text(
-                                "Forget Password?",
+                                'Sign up with',
                                 style: TextStyle(
-                                  color: const Color.fromARGB(255, 179, 19, 7),
-                                  fontSize: 15,
+                                  color: Color.fromARGB(255, 49, 49, 49),
                                 ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                thickness: 0.7,
+                                color: Color.fromARGB(255, 105, 105, 105)
+                                    .withOpacity(0.5),
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      MyButton(
-                        loading: loading,
-                          text: 'Sign in',
-                          onPressed: () {
-                            ValidateFunction();
-                          }),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Color.fromARGB(255, 105, 105, 105)
-                                  .withOpacity(0.5),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(
+                              Icons.facebook,
                             ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 0,
-                              horizontal: 10,
+                            Icon(
+                              Icons.facebook,
                             ),
-                            child: Text(
-                              'Sign up with',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 49, 49, 49),
+                            Icon(
+                              Icons.facebook,
+                            ),
+                            Icon(
+                              Icons.facebook,
+                            ),
+                            // Logo(Logos.facebook_f),
+                            // Logo(Logos.twitter),
+                            // Logo(Logos.google),
+                            // Logo(Logos.apple),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 25.0,
+                        ),
+                        // already have an account
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Didn't have an account ? ",
+                              style: GoogleFonts.roboto(
+                                  color: AppColors().blackColor, fontSize: 15),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(() => const SignupScreen(),
+                                    transition: Transition.upToDown,
+                                    duration: Duration(seconds: 2));
+                              },
+                              child: Text(
+                                "Register",
+                                style: GoogleFonts.montserrat(
+                                    color:
+                                        const Color.fromARGB(255, 73, 7, 255),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              thickness: 0.7,
-                              color: Color.fromARGB(255, 105, 105, 105)
-                                  .withOpacity(0.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          Icon(
-                            Icons.facebook,
-                          ),
-                          // Logo(Logos.facebook_f),
-                          // Logo(Logos.twitter),
-                          // Logo(Logos.google),
-                          // Logo(Logos.apple),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 25.0,
-                      ),
-                      // already have an account
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Didn't have an account ? ",
-                            style: GoogleFonts.roboto(
-                                color: AppColors().blackColor, fontSize: 15),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => const SignupScreen(),
-                                  transition: Transition.upToDown,
-                                  duration: Duration(seconds: 2));
-                            },
-                            child: Text(
-                              "Register",
-                              style: GoogleFonts.montserrat(
-                                  color: const Color.fromARGB(255, 73, 7, 255),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                    ],
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

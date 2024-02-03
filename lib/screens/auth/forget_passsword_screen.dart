@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/responsive/screen_size.dart';
 import 'package:e_commerce_app/screens/auth/theme/theme.dart';
 import 'package:e_commerce_app/screens/auth/widgets/button.dart';
 import 'package:e_commerce_app/screens/auth/widgets/custom_scaffold.dart';
@@ -103,37 +104,49 @@ class _ForgetPassowordState extends State<ForgetPassoword> {
                   ),
                 ),
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Password Reset !",
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w900,
-                            color: lightColorScheme.primary,
-                            fontFamily: 'Muli1'),
-                      ),
-                      Text(
-                        "Please enter your email &",
-                        style: TextStyle(fontSize: 16.0, fontFamily: 'Muli1'),
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      MyTextField(
-                        controller: emailcontroller,
-                        name: 'Email',
-                      ),
-                      const SizedBox(
-                        height: 30.0,
-                      ),
-                      MyButton(
-                          text: 'Forget',
-                          onPressed: () {
-                            ForgetFunction();
-                          }),
-                    ],
+                  child: Padding(
+                    padding:
+                        MediaQuery.of(context).size.width > mobileScreenWidth
+                            ? EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.28)
+                            : EdgeInsets.all(0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Reset your Password !",
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w900,
+                              color: lightColorScheme.primary,
+                              fontFamily: 'Muli1'),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Please enter your email, and we'll send you an email to reset your password",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16.0, fontFamily: 'Muli1'),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        MyTextField(
+                          controller: emailcontroller,
+                          name: 'Email',
+                        ),
+                        const SizedBox(
+                          height: 30.0,
+                        ),
+                        MyButton(
+                            text: 'Reset Password',
+                            onPressed: () {
+                              ForgetFunction();
+                            }),
+                      ],
+                    ),
                   ),
                 ),
               ),

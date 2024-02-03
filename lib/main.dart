@@ -1,4 +1,6 @@
 import 'package:e_commerce_app/firebase_options.dart';
+import 'package:e_commerce_app/responsive/resp.dart';
+import 'package:e_commerce_app/screens/Home%20Screen/web_Screen.dart';
 import 'package:e_commerce_app/screens/Splash%20Screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Deal Dash',
       theme: ThemeData.light(),
-      home: WellcomeScreen(),
+      home: ResponsiveScreens(WebScreen: MyWebScreen(), MobileScreen: WellcomeScreen())
     );
   }
 }
