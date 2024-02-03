@@ -1,12 +1,12 @@
 import 'package:e_commerce_app/responsive/screen_size.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
-import 'package:e_commerce_app/screens/auth/forget_passsword_screen.dart';
 import 'package:e_commerce_app/screens/auth/signup_screen.dart';
 import 'package:e_commerce_app/screens/auth/theme/theme.dart';
 import 'package:e_commerce_app/screens/auth/widgets/button.dart';
 import 'package:e_commerce_app/screens/auth/widgets/custom_scaffold.dart';
 import 'package:e_commerce_app/screens/auth/widgets/text_filed.dart';
 import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/utils/utills.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,17 +30,18 @@ class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> MyKey = GlobalKey();
   bool loading = false;
 
+  // login
   void ValidateFunction() {
     if (emailController.text.isEmpty) {
-      showSnakBar("Email is Empty");
+      utills.snackbarTop("Error404", "Email cannot be empty !");
       return;
     } else if (!isValidEmail(emailController.text)) {
-      showSnakBar("Please Enter a valid email");
+      utills.snackbarTop("Error404", "Please Enter a valid email");
     } else if (emailController.text.isEmpty) {
-      showSnakBar("Password is Empty");
+      utills.snackbarTop("Error404", "Password is Empty");
       return;
     } else if (passwordController.text.length < 8) {
-      showSnakBar("Password must at least 8");
+      utills.snackbarTop("Error404", "Password must at least 8");
       return;
     } else {
       Login();
@@ -65,12 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-        showSnakBar(
+        utills.snackbarTop("Error404",
             "Invalid Credentials ! Please enter valid email and password");
       } else if (e.code == 'user-not-found') {
-        showSnakBar("Email does not foud");
+        utills.snackbarTop("Error404", "Email does not foud");
       } else if (e.code == 'wrong-password') {
-        showSnakBar("Password is incorrect");
+        utills.snackbarTop("Error404", "Password is incorrect");
       }
       setState(() {
         loading = false;
@@ -81,10 +82,10 @@ class _LoginScreenState extends State<LoginScreen> {
   // Forget password
   void ForgetFunction() {
     if (resetemailController.text.isEmpty) {
-      showSnakBar("Email is Empty");
+      utills.snackbarTop("Error404", "Email cannot be empty !");
       return;
     } else if (!isValidEmail(resetemailController.text)) {
-      showSnakBar("Please Enter a valid email");
+      utills.snackbarTop("Error404", "Please enter a valid email");
     } else {
       Reset_Password();
     }
@@ -100,20 +101,23 @@ class _LoginScreenState extends State<LoginScreen> {
         await FirebaseAuth.instance
             .sendPasswordResetEmail(email: resetemailController.text.toString())
             .then((value) {
-          showSnakBar("We have Send to email ! Please Check Your email");
+          utills.snackbarTop(
+              "Success", "We have Send to email ! Please Check Your email");
           resetemailController.clear();
           setState(() {
             loading = false;
           });
         });
       } else {
-        showSnakBar("No user found");
+        showSnakBar("");
+        utills.snackbarTop("Error404", "No user found");
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
-        showSnakBar("Invalid Credentials ! Please enter valid email");
+        utills.snackbarTop(
+            "Error404", "Invalid Credentials ! Please enter valid email");
       } else if (e.code == 'user-not-found') {
-        showSnakBar("Email does not foud");
+        utills.snackbarTop("Error404", "Email does not foud");
       }
       setState(() {
         loading = false;
@@ -283,7 +287,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 name: "Enter your email"),
                                             SizedBox(height: 30),
                                             MyButton(
-                                              loading: loading,
+                                                loading: loading,
                                                 text: 'Reset Password',
                                                 onPressed: () {
                                                   ForgetFunction();

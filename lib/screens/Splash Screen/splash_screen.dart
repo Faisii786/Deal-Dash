@@ -1,7 +1,6 @@
 import 'package:e_commerce_app/screens/Splash%20Screen/Splash_button2.dart';
 import 'package:e_commerce_app/screens/Splash%20Screen/splash_button1.dart';
 import 'package:e_commerce_app/res/colors.dart';
-import 'package:e_commerce_app/screens/Splash%20Screen/splash_services.dart';
 import 'package:e_commerce_app/screens/auth/login_screen.dart';
 import 'package:e_commerce_app/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +14,11 @@ class WellcomeScreen extends StatefulWidget {
 }
 
 class _WellcomeScreenState extends State<WellcomeScreen> {
-  CheckUserState splashServices = CheckUserState();
+  //CheckUserState splashServices = CheckUserState();
   @override
   void initState() {
     super.initState();
-     splashServices.islogin(context);
+     //splashServices.islogin(context);
   }
 
   @override
