@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
+import 'package:e_commerce_app/res/colors.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/addToCartButton.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/buy_now.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
@@ -23,6 +25,8 @@ class ProductsDetailScreenWidget extends StatefulWidget {
 
 class _ProductsDetailScreenWidgetState
     extends State<ProductsDetailScreenWidget> {
+  toggleFavController controller = Get.put(toggleFavController());
+
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future addToCart() async {
@@ -60,176 +64,218 @@ class _ProductsDetailScreenWidgetState
 
   bool loading = false;
 
-  Color myColor = Color(0xFF95353D);
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: Get.width,
-            height: Get.height,
-            color: Colors.red,
-          ),
-          //Title-Container
-          Container(
-            width: Get.width,
-            height: Get.height * 0.31,
-            color: Colors.transparent,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                AppColors().gradi1,
+                AppColors().backgroundColor1,
+              ])),
+            ),
+            //Title-Container
+            Container(
+              width: double.infinity,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => MyBottomNavbar());
+                          },
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: AppColors().whiteColor,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.toogleFavorite();
+                            controller.increaseFavCount();
+                          },
+                          child: Obx(
+                            () => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Icon(
+                                controller.fav.isFalse
+                                    ? Icons.favorite_outline
+                                    : Icons.favorite,
+                                color: controller.fav.isTrue
+                                    ? Colors.red
+                                    : Colors.white,
+                                size: 25,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
-                    height: 20,
+                    height: MediaQuery.of(context).size.height * 0.02,
                   ),
                   Text(
                     widget.title,
                     style: TextStyle(
                         fontSize: 30,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Muli1'),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Text(
-                    "Upto 3200DPI Control",
-                    style: TextStyle(fontSize: 15, color: Colors.white),
+                    "upto 3200DPI control",
+                    style: TextStyle(
+                        fontSize: 15, color: Colors.white, fontFamily: 'Mulu6'),
                   ),
                 ],
               ),
             ),
-          ),
-          // //Price-Container
-          Container(
-            color: Colors.transparent,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Price",
-                    style: TextStyle(fontSize: 15, color: Colors.white)),
-                Text(widget.price,
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white)),
-              ],
-            ),
-          ),
-          //Second Main Container
-          Positioned(
-            top: Get.height * 0.45,
-            child: SingleChildScrollView(
-              child: Container(
-                width: Get.width,
-                height: Get.height * 0.6,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    )),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+            // //Price-Container
+            // Container(
+            //   color: Colors.transparent,
+            //   child: Column(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text("Price",
+            //           style: TextStyle(fontSize: 15, color: Colors.white)),
+            //       Text(widget.price,
+            //           style: TextStyle(
+            //               fontSize: 20,
+            //               fontWeight: FontWeight.bold,
+            //               color: Colors.white)),
+            //     ],
+            //   ),
+            // ),
+            //Second Main Container
+            Positioned(
+              top: MediaQuery.of(context).size.width * 0.8,
+              child: SingleChildScrollView(
+                child: Container(
+                  width: Get.width,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 100,
+                        height: MediaQuery.of(context).size.height * 0.15,
                       ),
-                      Text(
-                          "3200 dpi Mechanical Gaming Mouse RGB with 7 Programmable Buttons - 7 LED Light Wired USB Optical Mouse with Side Buttons & Mouse Pad for PC, Laptop, Computer, Gaming, Pubg Mobile - Black, White & Pink - FunBug"),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Text(
+                          "PS4 Console 500 GB White - Playstation 4 \nPlayStation 4 redefines rich and immersive gameplay with powerful graphics and speed, intelligent personalisation, deeply integrated social capabilities, and innovative second-screen features Background downloading and updating capability also allows you to immediately play digital titles.",
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
-          ),
-          //image Container
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              height: Get.height * 0.6,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 100, right: 20),
-                child: Image.asset(
-                  widget.image,
+            //image Container
+            Align(
+              alignment: Alignment.centerRight,
+              child: Container(
+                height: Get.height * 0.6,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 100, right: 20),
+                  child: Image.asset(
+                    widget.image,
+                  ),
                 ),
               ),
             ),
-          ),
-          //Buttons Row
-          Column(
-            children: [
-              Spacer(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Row(
-                  children: [
-                    AddToCartButton(
-                        loading: loading,
-                        onPressed: () async {
-                          await addToCart();
-                        }),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    // Container(
-                    //     decoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       border: Border.all(
-                    //         color: Colors.black,
-                    //       ),
-                    //     ),
-                    //     child: IconButton(
-                    //         onPressed: () {},
-                    //         icon: Icon(
-                    //           Icons.shopping_cart_outlined,
-                    //           color: Colors.black,
-                    //         ))),
-                    // SizedBox(
-                    //   width: 10,
-                    // ),
-                    BuyButton(text: 'Buy Now'),
-                    // Container(
-                    //   width: Get.width * 0.79,
-                    //   height: Get.height * 0.06,
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.transparent,
-                    //     borderRadius: BorderRadius.circular(10),
-                    //   ),
-                    //   child: ElevatedButton(
-                    //     onPressed: () {},
-                    //     child: Text(
-                    //       'BUY NOW',
-                    //       style: TextStyle(
-                    //           fontWeight: FontWeight.bold,
-                    //           fontSize: 20,
-                    //           color: Colors.white),
-                    //     ),
-                    //     style: ButtonStyle(
-                    //       backgroundColor:
-                    //           MaterialStateProperty.all<Color?>(Colors.blue),
-                    //       shape:
-                    //           MaterialStateProperty.all<RoundedRectangleBorder>(
-                    //         RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(10),
-                    //           side: BorderSide(color: Colors.blue, width: 1.0),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
+            //Buttons Row
+            Column(
+              children: [
+                Spacer(),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Row(
+                    children: [
+                      AddToCartButton(
+                          loading: loading,
+                          onPressed: () async {
+                            await addToCart();
+                          }),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      // Container(
+                      //     decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //       border: Border.all(
+                      //         color: Colors.black,
+                      //       ),
+                      //     ),
+                      //     child: IconButton(
+                      //         onPressed: () {},
+                      //         icon: Icon(
+                      //           Icons.shopping_cart_outlined,
+                      //           color: Colors.black,
+                      //         ))),
+                      // SizedBox(
+                      //   width: 10,
+                      // ),
+                      BuyButton(text: 'Buy Now'),
+                      // Container(
+                      //   width: Get.width * 0.79,
+                      //   height: Get.height * 0.06,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.transparent,
+                      //     borderRadius: BorderRadius.circular(10),
+                      //   ),
+                      //   child: ElevatedButton(
+                      //     onPressed: () {},
+                      //     child: Text(
+                      //       'BUY NOW',
+                      //       style: TextStyle(
+                      //           fontWeight: FontWeight.bold,
+                      //           fontSize: 20,
+                      //           color: Colors.white),
+                      //     ),
+                      //     style: ButtonStyle(
+                      //       backgroundColor:
+                      //           MaterialStateProperty.all<Color?>(Colors.blue),
+                      //       shape:
+                      //           MaterialStateProperty.all<RoundedRectangleBorder>(
+                      //         RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(10),
+                      //           side: BorderSide(color: Colors.blue, width: 1.0),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -324,28 +370,7 @@ class _ProductsDetailScreenWidgetState
 //                 color: AppColors().blackColor,
 //               )),
 //           actions: [
-//             GestureDetector(
-//               onTap: () {
-//                 widget.controller.toogleFavorite();
-//                 widget.controller.increaseFavCount();
-//               },
-//               child: Obx(
-//                 () => Padding(
-//                   padding: const EdgeInsets.symmetric(horizontal: 10),
-//                   child: Icon(
-//                     widget.controller.fav.isFalse
-//                         ? Icons.favorite_outline
-//                         : Icons.favorite,
-//                     color: widget.controller.fav.isTrue
-//                         ? Colors.red
-//                         : Colors.black,
-//                     size: 25,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
+          
 //         body: Stack(
 //           children: [
 //             SingleChildScrollView(

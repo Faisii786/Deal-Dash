@@ -10,7 +10,7 @@ class CartAndNoticationIcon extends StatelessWidget {
 
   CartAndNoticationIcon({required this.icon, required this.onTap});
 
-  toggleFav controller = Get.put(toggleFav());
+  toggleFavController controller = Get.put(toggleFavController());
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

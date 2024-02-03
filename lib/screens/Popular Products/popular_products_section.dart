@@ -17,10 +17,10 @@ class PopuarProductsSection extends StatelessWidget {
       child: Row(
         children: [
           PopularProducts(
-            img: "assets/images/mouse/mouse.png",
+            img: "assets/images/mouse/bmouse.jpg",
             onTap: () {
               Get.to(() => ProductsDetailScreenWidget(
-                  '3200 dpi Mouse', 'assets/images/mouse/cmouse.png', '1500'));
+                  'Playstation 4', 'assets/images/mouse/mouse1.png', '1500'));
             },
           ),
           SizedBox(

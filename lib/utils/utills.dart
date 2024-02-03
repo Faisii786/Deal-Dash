@@ -18,21 +18,11 @@ class utills {
     Get.snackbar(
       title,
       message,
-      snackPosition: SnackPosition.TOP,
+      snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColors().backgroundColor2,
       colorText: AppColors().whiteColor,
       duration: Duration(seconds: 2),
     );
   }
 
-  static snackbarCenter(String title, String message) {
-    Get.snackbar(
-      title,
-      message,
-      snackPosition: SnackPosition.TOP,
-      backgroundColor: AppColors().backgroundColor2,
-      colorText: AppColors().whiteColor,
-      duration: Duration(seconds: 2),
-    );
-  }
 }

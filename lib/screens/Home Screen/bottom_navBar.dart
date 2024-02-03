@@ -14,7 +14,7 @@ class MyBottomNavbar extends StatefulWidget {
 }
 
 class _MyBottomNavbarState extends State<MyBottomNavbar> {
-  toggleFav controller = Get.put(toggleFav());
+  toggleFavController controller = Get.put(toggleFavController());
 
   int selected = 0;
   PageController _controller = PageController();

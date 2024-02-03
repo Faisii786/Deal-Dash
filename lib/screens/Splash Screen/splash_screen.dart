@@ -1,26 +1,25 @@
 import 'package:e_commerce_app/screens/Splash%20Screen/Splash_button2.dart';
 import 'package:e_commerce_app/screens/Splash%20Screen/splash_button1.dart';
-//import 'package:e_commerce_app/screens/auth/login_page.dart';
-//import 'package:e_commerce_app/screens/auth/signup.dart';
 import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/screens/Splash%20Screen/splash_services.dart';
 import 'package:e_commerce_app/screens/auth/login_screen.dart';
 import 'package:e_commerce_app/screens/auth/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class WellcomeScreen extends StatefulWidget {
+  const WellcomeScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<WellcomeScreen> createState() => _WellcomeScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  //CheckUserState splashServices = CheckUserState();
+class _WellcomeScreenState extends State<WellcomeScreen> {
+  CheckUserState splashServices = CheckUserState();
   @override
   void initState() {
     super.initState();
-    // splashServices.islogin(context);
+     splashServices.islogin(context);
   }
 
   @override
