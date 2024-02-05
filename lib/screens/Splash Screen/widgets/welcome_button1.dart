@@ -3,12 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:e_commerce_app/res/colors.dart';
 
 // ignore: must_be_immutable
-class SplashButton2 extends StatelessWidget {
+class WelcomeButton1 extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   bool loading;
 
-  SplashButton2({
+  WelcomeButton1({
     super.key,
     required this.text,
     required this.onPressed,
@@ -21,7 +21,7 @@ class SplashButton2 extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors().whiteColor, width: 2),
+          color: AppColors().whiteColor,
           borderRadius: BorderRadius.circular(50),
         ),
         width: double.infinity,
@@ -29,14 +29,14 @@ class SplashButton2 extends StatelessWidget {
         child: loading
             ? Center(child: CircularProgressIndicator())
             : Center(
-              child: Text(
+                child: Text(
                   text,
                   style: GoogleFonts.roboto(
-                    color: AppColors().whiteColor,
+                    color: AppColors().blackColor,
                     fontSize: 16,
                   ),
                 ),
-            ),
+              ),
       ),
     );
   }

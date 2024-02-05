@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/res/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -8,9 +9,6 @@ class MyCartScreen extends StatefulWidget {
 }
 
 class _MyCartScreenState extends State<MyCartScreen> {
-  //final userID = FirebaseAuth.instance.currentUser!.uid;
-  final ID = DateTime.now().microsecondsSinceEpoch.toString();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +20,11 @@ class _MyCartScreenState extends State<MyCartScreen> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream:
-            FirebaseFirestore.instance.collection('productsData').snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection("cartData")
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -61,8 +62,11 @@ class _MyCartScreenState extends State<MyCartScreen> {
                       trailing: GestureDetector(
                         onTap: () async {
                           await FirebaseFirestore.instance
-                              .collection("productsData")
-                              .doc(documents[index]['id'])
+                              .collection("users")
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .collection("cartData")
+                              .doc(snapshot.data!.docs[index]["cartId"]
+                                  .toString())
                               .delete();
                         },
                         child: Padding(

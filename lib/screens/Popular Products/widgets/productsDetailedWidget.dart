@@ -7,6 +7,7 @@ import 'package:e_commerce_app/screens/Cart%20Screen/addToCartButton.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/buy_now.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
 import 'package:e_commerce_app/utils/utills.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,20 +28,21 @@ class _ProductsDetailScreenWidgetState
     extends State<ProductsDetailScreenWidget> {
   toggleFavController controller = Get.put(toggleFavController());
 
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
   Future addToCart() async {
     try {
       setState(() {
         loading = true;
       });
 
-      //final userID = FirebaseAuth.instance.currentUser!.uid;
-      final ID = DateTime.now().microsecondsSinceEpoch.toString();
-      final cartCollection = _firestore.collection("productsData");
+      final _cartID = DateTime.now().microsecondsSinceEpoch.toString();
 
-      await cartCollection.doc(ID).set({
-        'id': ID,
+      final _userID = FirebaseAuth.instance.currentUser!.uid;
+      final getUserData = FirebaseFirestore.instance
+          .collection("users")
+          .doc(_userID.toString());
+
+      await getUserData.collection("cartData").doc(_cartID.toString()).set({
+        'cartId': _cartID,
         'title': widget.title,
         'price': widget.price,
         'image': widget.image,

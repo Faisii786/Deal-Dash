@@ -1,5 +1,5 @@
-import 'package:e_commerce_app/screens/Splash%20Screen/Splash_button2.dart';
-import 'package:e_commerce_app/screens/Splash%20Screen/splash_button1.dart';
+import 'package:e_commerce_app/screens/Splash%20Screen/widgets/welcome_button2.dart';
+import 'package:e_commerce_app/screens/Splash%20Screen/widgets/welcome_button1.dart';
 import 'package:e_commerce_app/res/colors.dart';
 import 'package:e_commerce_app/screens/auth/login_screen.dart';
 import 'package:e_commerce_app/screens/auth/signup_screen.dart';
@@ -14,13 +14,6 @@ class WellcomeScreen extends StatefulWidget {
 }
 
 class _WellcomeScreenState extends State<WellcomeScreen> {
-  //CheckUserState splashServices = CheckUserState();
-  @override
-  void initState() {
-    super.initState();
-     //splashServices.islogin(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +26,7 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
               BlendMode.multiply,
             ),
             child: Image.asset(
-              "assets/images/splash.jpg",
+              "assets/images/wellcome.jpg",
               fit: BoxFit.cover,
               height: Get.height,
             ),
@@ -69,15 +62,15 @@ class _WellcomeScreenState extends State<WellcomeScreen> {
               SizedBox(
                 height: 100,
               ),
-              SplashButton1(
-                  text: "Get Start",
+              WelcomeButton1(
+                  text: "Get Started",
                   onPressed: () {
                     Get.to(() => LoginScreen());
                   }),
               SizedBox(
                 height: 10,
               ),
-              SplashButton2(
+              WelcomeButton2(
                   text: "Create Account",
                   onPressed: () {
                     Get.to(() => SignupScreen());
