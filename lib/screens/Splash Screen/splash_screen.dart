@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Spacer(),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  padding: const EdgeInsets.symmetric(vertical: 30),
                   child: CupertinoActivityIndicator(
                     color: Colors.white,
                   ),

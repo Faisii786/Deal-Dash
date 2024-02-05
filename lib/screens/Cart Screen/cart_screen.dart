@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/res/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,9 +49,14 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    decoration: BoxDecoration(
-                        color: AppColors().SearchTextFieldbkgrnClr,
-                        borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        offset: Offset(0, 4),
+                        blurStyle: BlurStyle.inner,
+                        blurRadius: 1,
+                      ),
+                    ], borderRadius: BorderRadius.circular(10)),
                     child: ListTile(
                       leading: Image.asset(documents[index]['image']),
                       contentPadding:

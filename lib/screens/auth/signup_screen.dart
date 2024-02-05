@@ -308,6 +308,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           height: 30.0,
                         ),
                         MyButton(
+                          loading: loading,
                             text: 'Register',
                             onPressed: () {
                               SignupFunction();

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
-import 'package:e_commerce_app/screens/auth/login_screen.dart';
+import 'package:e_commerce_app/screens/Splash%20Screen/wellcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,7 @@ class CheckUserState {
       });
     } else if (user == null) {
       Timer(const Duration(seconds: 3), () {
-        Get.off(() => const LoginScreen());
+        Get.off(() => const WellcomeScreen());
       });
     }
   }
