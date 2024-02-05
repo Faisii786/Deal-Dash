@@ -18,6 +18,8 @@ class DashboardScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
             title: Text(
               "Deal Dash",
               style: TextStyle(fontFamily: 'Muli1'),
@@ -60,11 +62,11 @@ class DashboardScreen extends StatelessWidget {
                   ),
                   CashBackContainer(),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   MyCaraousalSlider(),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   OffersHeadings(heading: 'Special for you'),
                   SizedBox(

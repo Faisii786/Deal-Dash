@@ -6,24 +6,27 @@ class MyCaraousalSlider extends StatelessWidget {
 
   // Define a list of image paths for the carousel
   final List<String> carouselImages = [
-    'assets/images/Image Banner 2.png',
-    'assets/images/Image Banner 3.png',
-    'assets/images/Image Banner 2.png',
+    'assets/images/jackets.jpg',
+    'assets/images/shirts.jpg',
+    'assets/images/coat.jpg',
   ];
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-          height: 200,
-          autoPlay: true,
-          enableInfiniteScroll: true,
-          viewportFraction: 1.0,
-          autoPlayCurve: Curves.easeInSine),
+        animateToClosest: true,
+        height: 250,
+        autoPlay: true,
+        enableInfiniteScroll: true,
+        viewportFraction: 1.0,
+        autoPlayCurve: Curves.easeInSine,
+      ),
       items: carouselImages.map((imagePath) {
-        return Image.asset(
-          imagePath,
-          fit: BoxFit.cover,
+        return Container(
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              image: DecorationImage(image: AssetImage(imagePath))),
         );
       }).toList(),
     );

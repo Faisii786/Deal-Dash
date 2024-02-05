@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/res/colors.dart';
 import 'package:e_commerce_app/screens/Profile%20Screens/widgets/account_containers.dart';
@@ -63,11 +64,18 @@ class _MyAccountState extends State<MyAccount> {
                             Stack(
                               alignment: Alignment.bottomRight,
                               children: [
-                                CircleAvatar(
-                                  radius: 70,
-                                  backgroundImage:
-                                      NetworkImage(UserData['image']),
+                                CachedNetworkImage(
+                                  imageUrl: UserData['image'],
+                                  placeholder: (context, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
+                                // CircleAvatar(
+                                //   radius: 70,
+                                //   backgroundImage:
+                                //       NetworkImage(UserData['image']),
+                                // ),
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       bottom: 15, right: 5),

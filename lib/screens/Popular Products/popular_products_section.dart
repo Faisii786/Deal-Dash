@@ -20,7 +20,10 @@ class PopuarProductsSection extends StatelessWidget {
             img: "assets/images/mouse/bmouse.jpg",
             onTap: () {
               Get.to(() => ProductsDetailScreenWidget(
-                  'Playstation 4', 'assets/images/mouse/mouse1.png', '1500'));
+                  'Playstation 4',
+                  'assets/images/mouse/mouse1.png',
+                  '1500',
+                  'PS4 Console 500 GB White - Playstation 4 \nPlayStation 4 redefines rich and immersive gameplay with powerful graphics and speed, intelligent personalisation, deeply integrated social capabilities, and innovative second-screen features Background downloading and updating capability also allows you to immediately play digital titles.'));
             },
           ),
           SizedBox(
@@ -30,37 +33,12 @@ class PopuarProductsSection extends StatelessWidget {
             img: "assets/images/mouse/headset.jpg",
             onTap: () {
               Get.to(() => ProductsDetailScreenWidget(
-                  'hello', 'assets/images/mouse/mouse1.png', '1500'));
+                  'hello',
+                  'assets/images/app_icon.png',
+                  '1300',
+                  'hsahgdgjdhsdjagjgdgajdadjsadgadgsadjag'));
             },
           ),
-
-          // PopularProducts(
-          //   img: "assets/images/pant.png",
-          //   onTap: () {
-          //     Get.to(() => ProductsDetailScreenWidget(
-          //           controller: controller,
-          //           img: 'assets/images/pant.png',
-          //           rating: '3.0',
-          //           name: 'Trouser',
-          //           price: '\$90.00',
-          //         ));
-          //   },
-          // ),
-          // SizedBox(
-          //   width: 5,
-          // ),
-          // PopularProducts(
-          //   img: "assets/images/glap.png",
-          //   onTap: () {
-          //     Get.to(() => ProductsDetailScreenWidget(
-          //           controller: controller,
-          //           img: 'assets/images/glap.png',
-          //           rating: '4.3',
-          //           name: 'Branded Glap',
-          //           price: '\$50.65',
-          //         ));
-          //   },
-          // ),
           SizedBox(
             width: 5,
           ),

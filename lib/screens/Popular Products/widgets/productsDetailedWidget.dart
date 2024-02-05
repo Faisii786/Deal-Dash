@@ -7,7 +7,6 @@ import 'package:e_commerce_app/screens/Cart%20Screen/addToCartButton.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/buy_now.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
 import 'package:e_commerce_app/utils/utills.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,8 +14,9 @@ class ProductsDetailScreenWidget extends StatefulWidget {
   final String title;
   final String price;
   final String image;
+  final String desc;
 
-  ProductsDetailScreenWidget(this.title, this.image, this.price);
+  ProductsDetailScreenWidget(this.title, this.image, this.price, this.desc);
 
   @override
   State<ProductsDetailScreenWidget> createState() =>
@@ -35,15 +35,17 @@ class _ProductsDetailScreenWidgetState
         loading = true;
       });
 
-      final userID = FirebaseAuth.instance.currentUser!.uid;
+      //final userID = FirebaseAuth.instance.currentUser!.uid;
+      final ID = DateTime.now().microsecondsSinceEpoch.toString();
       final cartCollection = _firestore.collection("productsData");
 
-      await cartCollection.add({
-        'id': userID,
+      await cartCollection.doc(ID).set({
+        'id': ID,
         'title': widget.title,
         'price': widget.price,
         'image': widget.image,
       });
+
       utills.snackbarTop("Success", "Data is successfully added to cart");
       setState(() {
         loading = true;
@@ -144,24 +146,6 @@ class _ProductsDetailScreenWidgetState
                 ],
               ),
             ),
-            // //Price-Container
-            // Container(
-            //   color: Colors.transparent,
-            //   child: Column(
-            //     mainAxisAlignment: MainAxisAlignment.start,
-            //     crossAxisAlignment: CrossAxisAlignment.start,
-            //     children: [
-            //       Text("Price",
-            //           style: TextStyle(fontSize: 15, color: Colors.white)),
-            //       Text(widget.price,
-            //           style: TextStyle(
-            //               fontSize: 20,
-            //               fontWeight: FontWeight.bold,
-            //               color: Colors.white)),
-            //     ],
-            //   ),
-            // ),
-            //Second Main Container
             Positioned(
               top: MediaQuery.of(context).size.width * 0.8,
               child: SingleChildScrollView(
@@ -184,7 +168,7 @@ class _ProductsDetailScreenWidgetState
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          "PS4 Console 500 GB White - Playstation 4 \nPlayStation 4 redefines rich and immersive gameplay with powerful graphics and speed, intelligent personalisation, deeply integrated social capabilities, and innovative second-screen features Background downloading and updating capability also allows you to immediately play digital titles.",
+                          widget.desc,
                           textAlign: TextAlign.justify,
                         ),
                       ),

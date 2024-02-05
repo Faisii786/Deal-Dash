@@ -1,9 +1,6 @@
-import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
 import 'package:e_commerce_app/res/colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 
 class MyCartScreen extends StatefulWidget {
   @override
@@ -11,27 +8,22 @@ class MyCartScreen extends StatefulWidget {
 }
 
 class _MyCartScreenState extends State<MyCartScreen> {
-  final userID = FirebaseAuth.instance.currentUser!.uid;
+  //final userID = FirebaseAuth.instance.currentUser!.uid;
+  final ID = DateTime.now().microsecondsSinceEpoch.toString();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Your Cart'),
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            Get.to(() => MyBottomNavbar());
-          },
-          child: Icon(Icons.arrow_back_ios),
+        title: Text(
+          'My Cart',
+          style: TextStyle(fontFamily: 'Muli1', color: Colors.black),
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection('productsData')
-            .where('id', isEqualTo: userID)
-            .snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection('productsData').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -47,80 +39,41 @@ class _MyCartScreenState extends State<MyCartScreen> {
               // Cart is empty, display a message
               return Center(
                   child: Text(
-                'Your cart is empty.',
-                style: TextStyle(fontSize: 23),
+                'your cart is empty.',
+                style: TextStyle(fontSize: 23, fontFamily: 'Muli6'),
               ));
             }
             return ListView.builder(
               itemCount: documents.length,
               itemBuilder: (context, index) {
-                Map<String, dynamic> data =
-                    documents[index].data() as Map<String, dynamic>;
-
-                String imageUrl = data['image'];
-                String id = data['id'];
-                print(id);
-
                 return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                              color: AppColors().SearchTextFieldbkgrnClr,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 5, vertical: 10),
-                            child: Center(
-                              child: Image.asset(
-                                imageUrl,
-                                width: Get.width * 0.3,
-                                height: Get.height * 0.15,
-                              ),
-                            ),
-                          )),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            data['title'],
-                            style: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.width * 0.04,
-                            ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: AppColors().SearchTextFieldbkgrnClr,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: ListTile(
+                      leading: Image.asset(documents[index]['image']),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      title: Text(documents[index]['title']),
+                      subtitle: Text(documents[index]['price']),
+                      trailing: GestureDetector(
+                        onTap: () async {
+                          await FirebaseFirestore.instance
+                              .collection("productsData")
+                              .doc(documents[index]['id'])
+                              .delete();
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: Icon(
+                            Icons.delete,
+                            size: 30,
                           ),
-                          Text(data['price']),
-                          GestureDetector(
-                            onTap: () async {
-                              print(userID);
-                              try {
-                                await FirebaseFirestore.instance
-                                    .collection("productsData")
-                                    .doc(snapshot.data!.docs[index]['image'])
-                                    .delete();
-
-                                setState(() {});
-
-                                Get.snackbar("Deleted", "Product is Deleted");
-                              } catch (error) {
-                                print("Error deleting product: $error");
-                                Get.snackbar(
-                                    "Error", "Failed to delete product");
-                              }
-                            },
-                            child: Icon(
-                              Icons.delete,
-                              color: const Color.fromARGB(255, 68, 67, 67),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                    ],
+                    ),
                   ),
                 );
               },
