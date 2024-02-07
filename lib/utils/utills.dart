@@ -1,11 +1,11 @@
-import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/resouces/colors.dart';
 import 'package:get/get.dart';
 
 class utills {
   //SnackBars
-  static snackbarTop(String title, String message) {
+  static snackbarTop(String message) {
     Get.snackbar(
-      title,
+      '',
       message,
       snackPosition: SnackPosition.TOP,
       backgroundColor: AppColors().backgroundColor2,
@@ -14,9 +14,9 @@ class utills {
     );
   }
 
-  static snackbarBottom(String title, String message) {
+  static snackbarBottom(String message) {
     Get.snackbar(
-      title,
+      '',
       message,
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppColors().backgroundColor2,
@@ -24,5 +24,4 @@ class utills {
       duration: Duration(seconds: 2),
     );
   }
-
 }

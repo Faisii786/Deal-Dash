@@ -50,6 +50,7 @@ dependencies:
   http: ^1.2.0
   cached_network_image: ^3.3.1
   firebase_database: ^10.4.4
+  email_otp: ^2.1.2
 
 dev_dependencies:
   flutter_test:

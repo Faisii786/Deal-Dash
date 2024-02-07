@@ -3,7 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/resouces/colors.dart';
 
 class AddToCartButton extends StatelessWidget {
   final VoidCallback onPressed;

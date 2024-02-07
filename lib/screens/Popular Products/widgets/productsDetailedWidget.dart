@@ -2,7 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
-import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/resouces/colors.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/addToCartButton.dart';
 import 'package:e_commerce_app/screens/Cart%20Screen/buy_now.dart';
 import 'package:e_commerce_app/screens/Home%20Screen/bottom_navBar.dart';
@@ -48,18 +48,18 @@ class _ProductsDetailScreenWidgetState
         'image': widget.image,
       });
 
-      utills.snackbarTop("Success", "Data is successfully added to cart");
+      utills.snackbarTop("Data is successfully added to cart");
       setState(() {
         loading = true;
       });
       Get.to(() => MyBottomNavbar());
     } on FirebaseException catch (err) {
-      utills.snackbarTop("Error", err.toString());
+      utills.snackbarTop(err.toString());
       setState(() {
         loading = false;
       });
     } catch (e) {
-      utills.snackbarTop("Error", e.toString());
+      utills.snackbarTop(e.toString());
       setState(() {
         loading = false;
       });

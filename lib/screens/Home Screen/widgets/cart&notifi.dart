@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/State%20Managment/toogleFav.dart';
-import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/resouces/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

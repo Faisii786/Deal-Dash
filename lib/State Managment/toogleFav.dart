@@ -14,11 +14,11 @@ class toggleFavController extends GetxController {
     if (fav.value == true) {
       count.value++;
       print(count.value);
-      utills.snackbarBottom("Favourite", "Item is added to favourite");
+      utills.snackbarBottom("Item is added to favourite");
     } else if (fav.value == false) {
       count.value--;
       print(count.value);
-      utills.snackbarBottom("unFavourite", "Item is unfavourite");
+      utills.snackbarBottom("Item is unfavourite");
     }
   }
 }

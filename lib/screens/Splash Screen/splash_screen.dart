@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/screens/Splash%20Screen/splash_services.dart';
-import 'package:e_commerce_app/res/colors.dart';
+import 'package:e_commerce_app/resouces/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
